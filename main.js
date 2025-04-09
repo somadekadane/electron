@@ -93,6 +93,30 @@ function osWindow() {
     if (main) {
         os = new BrowserWindow({
             width: 1010,
+            height: 800,
+            // autoHideMenuBar: true,
+            resizable: false,
+            parent: main,
+            modal: true,
+            //ativação do preload.js
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+
+        })
+    }
+    os.loadFile('./src/views/os.html')
+    os.center()
+}
+
+// Janela MOTO
+let moto
+function motoWindow() {
+    nativeTheme.themeSource = 'light'
+    const main = BrowserWindow.getFocusedWindow()
+    if (main) {
+        moto = new BrowserWindow({
+            width: 1010,
             height: 720,
             // autoHideMenuBar: true,
             resizable: false,
@@ -100,8 +124,8 @@ function osWindow() {
             modal: true
         })
     }
-    os.loadFile('./src/views/os.html')
-    os.center()
+    moto.loadFile('./src/views/moto.html')
+    moto.center()
 }
 
 // Iniciar a aplicação
@@ -236,6 +260,10 @@ ipcMain.on('client-window', () => {
 
 ipcMain.on('os-window', () => {
     osWindow()
+})
+
+ipcMain.on('moto-window', () => {
+    motoWindow()
 })
 
 //==================================================================

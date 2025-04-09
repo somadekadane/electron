@@ -1,0 +1,6 @@
+Instalando o bootstrap
+ baixar os arquivos > clic donwload
+> Compiled CSS and JS
+> Extrair o arquivo zip
+> Jogar o pasta css - boostrap mim css
+> Jogar o pasta Js - boostrap mim JS
