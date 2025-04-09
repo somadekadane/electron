@@ -18,6 +18,11 @@ function os() {
     //uso da api(autorizada no preload.js)
     api.osWindow()
 }
+// envio de uma mensagem para o main abrir a janela moto
+function moto() {
+    //uso do api(autorizada no preload.js)
+    api.motoWindow()
+}
 
 // troca do icone do banco de dados
 api.dbStatus((event, message) => {

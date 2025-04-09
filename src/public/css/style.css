@@ -40,8 +40,22 @@ footer {
     padding: 5px;
 }
 
+/* Botao reset */
+#btnReset {
+    width: 64px;
+    height: 64px;
+    background-image: url('../img/clear.png');
+    border: none;
+    cursor: pointer;
+}
+
+
 footer p {
     color: #ffffff;
     padding-top: 7px;
     font-size: 1.2em;
+}
+
+body {
+    background-color: #d4dee7;
 }
