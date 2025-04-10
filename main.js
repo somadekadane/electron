@@ -5,10 +5,16 @@ const { app, BrowserWindow, nativeTheme, Menu, ipcMain, dialog, shell } = requir
 // Esta linha está relacionada ao preload.js
 const path = require('node:path')
 
-//Importacao do schema clientes da camada model
+//Importacao do schema clientes
 const { conectar, desconectar } = require("./database.js")
 
 const clientModel = require('./src/models/Clientes.js')
+
+// importacao do Schema Moto
+const motoModel = require('./src/models/Moto.js')
+
+// importacao do Schema OS
+const osModel = require('./src/models/Os.js')
 
 // importação do pacote jspdf (npm i jspdf)
 const { jspdf, default: JsPDF } = require('jspdf')
@@ -72,7 +78,7 @@ function clientWindow() {
             width: 1010,
             height: 680,
             //autoHideMenuBar: true,
-            resizable: false,
+            //resizable: false,
             parent: main,
             modal: true,
             //ativação do preload.js
@@ -157,7 +163,7 @@ ipcMain.on('db-connect', async (event) => {
     let conectado = await conectar()
     // se conectado for igual a true
     if (conectado) {
-        // enviar uma mensagem para o renderizador trocar o ícone, criar um delay de 0.5s para sincronizar a nuvem
+        // enviar uma mensagem para o renderizador trocar o ícone, criar um delay de 0.5s sincronizar a nuvem
         setTimeout(() => {
             event.reply('db-status', "conectado")
         }, 500) //500ms        
@@ -186,15 +192,15 @@ const template = [
         label: 'Cadastro',
         submenu: [
             {
-                label: 'Clientes',
+                label: 'Cadastro do Clientes',
                 click: () => clientWindow()
             },
             {
-                label: 'OS',
+                label: 'Cadastro do Veículo',
                 click: () => osWindow()
             },
             {
-                label: 'Moto',
+                label: 'OS',
                 click: () => osWindow()
             },
             {
@@ -276,11 +282,11 @@ ipcMain.on('moto-window', () => {
 
 //==================================================================
 //== Clientes - CRUD Create
-// recebimeto do objeto que contem os dados cliente
+// recebimeto do objeto com os dados cliente
 ipcMain.on('new-client', async (event, client) => {
     // importante teste de recibimento dos dados cliente
     console.log(client)
-    // cadastrar a estrutura de dados no banco de dados MOngoDB
+    // cadastro da estrutura de dados no banco de dados MOngoDB
     try {
         // criar uma nova estrutura de dados
         // Atenção! os atributos precisa ser identicos ao medelo
@@ -296,7 +302,7 @@ ipcMain.on('new-client', async (event, client) => {
             complementoCliente: client.complementCli,
             bairroCliente: client.neighborhoodCli,
             cidadeCliente: client.cityCli,
-            ufCliente: client.ufCli,
+            ufCliente: client.ufCli         
 
         })
         // salvar os dados do cliente no banco de dados
@@ -335,6 +341,92 @@ ipcMain.on('new-client', async (event, client) => {
     }
 })
 //== Fim - Clientes CRUD Create
+
+// ==========================================
+// == OS - CRUD Create ================
+// recebimento do objeto que contem os dados do cliente
+ipcMain.on('new-os', async (event, OS) => {
+    // Importante! Teste de recebimento dos dados do cliente
+    console.log(OS)
+    // console.log("teste")
+    // cadastrar a estrutura de dados no banco de dados usando a classe modelo. 
+    // Atenção!! os atributos precisam ser identicos ao modelo de dados Clientes.js 
+    // e os valores sao definidos pelo conteudo do objeto cliente 
+    try {
+      const newOS = new osModel({
+        descricaoOS: OS.desOS,
+        materialOS: OS.matOS,
+        dataOS: OS.datOS,
+        orcamentoOS: OS.orcOS,
+        pagamentoOS: OS.pagOS,
+        statusOS: OS.staOS
+      })
+      // salvar os dados do cliente no banco de dados
+      await newOS.save()
+      //Mensagem de confirmação
+      dialog.showMessageBox({
+        //Customização
+        type: 'info',
+        title: "Aviso",
+        message: "Cliente adicionado com sucesso",
+        buttons: ['OK']
+      }).then((result) => {
+        //ação ao precionar o botão 
+        if (result.response === 0) {
+          // enviar um pedido para o renderizador limpar os campos e resetar as 
+          // configurações pré definidas (rótulo) preload.js
+          event.reply('reset-form')
+        }
+  
+      })
+  
+    } catch (error) {
+      console.log(error)
+    }
+  })
+  // -- Fim - OS - CRUD Create ===========
+
+  // ==========================================
+// == Veiculo - CRUD Create ================
+// recebimento do objeto que contem os dados do cliente
+ipcMain.on('new-moto', async (event, mot) => {
+    // Importante! Teste de recebimento dos dados do cliente
+    console.log(mot)
+    // cadastrar a estrutura de dados no banco de dados usando a classe modelo. Atenção!! os atributos precisam ser identicos ao modelo de dados Clientes.js eos valores sao definidos pelo conteudo do objeto cliente 
+    try {
+      const newMoto = new motoModel({
+        proprietarioMoto: mot.proMot,
+        marcaMoto: mot.marMot,
+        modeloMoto: mot.modMot,
+        anoMoto: mot.anoMot,
+        placaMoto: mot.plaMot,
+        corMoto: mot.corMot,
+        chassiMoto: mot.chasMot
+      })
+      // salvar os dados do cliente no banco de dados
+      await newMoto.save()
+      //Mensagem de confirmação
+      dialog.showMessageBox({
+        //Customização
+        type: 'info',
+        title: "Aviso",
+        message: "Cliente adicionado com sucesso",
+        buttons: ['OK']
+      }).then((result) => {
+        //ação ao precionar o botão 
+        if (result.response === 0) {
+          // enviar um pedido para o renderizador limpar os campos e resetar as 
+          // configurações pré definidas (rótulo) preload.js
+          event.reply('reset-form')
+        }
+  
+      })
+  
+    } catch (error) {
+      console.log(error)
+    }
+  })
+  // -- Fim - Veiculo - CRUD Create ===========
 
 //========================================
 // == relatório de clientes ==============

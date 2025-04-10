@@ -23,7 +23,7 @@ const clienteSchema = new Schema({
         type: String
     },
     cepCliente: {
-        type: String,        
+        type: String        
     },
     logradouroCliente: {
         type: String
