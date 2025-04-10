@@ -20,7 +20,7 @@ let statusOS = document.getElementById('osStatus')
 
 // Evento associado ao botão submit (uso das validações do html)
 frmOS.addEventListener('submit', async (event) =>{
-    //evitar o comportamento padrao do submit que é enviar os dados do formulario e reiniciar o documento html
+    //evitar o comportamento padrao do submit que é enviar os dados do formulario
     event.preventDefault()
     //Teste importante ( recebimento dos dados do formulario - passo 1 do fluxo)
     console.log(descricaoOS.value, materialOS.value, dataOS.value, orcamentoOS.value, pagamentoOS.value, statusOS.value) 

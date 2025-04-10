@@ -121,7 +121,11 @@ function motoWindow() {
             // autoHideMenuBar: true,
             resizable: false,
             parent: main,
-            modal: true
+            modal: true,
+            // ativação do preload.js
+            webPreferences: {
+              preload: path.join(__dirname, 'preload.js')
+            }
         })
     }
     moto.loadFile('./src/views/moto.html')
@@ -187,6 +191,10 @@ const template = [
             },
             {
                 label: 'OS',
+                click: () => osWindow()
+            },
+            {
+                label: 'Moto',
                 click: () => osWindow()
             },
             {
