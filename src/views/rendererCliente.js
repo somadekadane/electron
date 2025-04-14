@@ -23,7 +23,7 @@ function buscarCEP() {
 // a constante do foco obtem o elemento html
 const foco = document.getElementById('searchClient')
 
-// iniciar a janela de cliente alterrando as propriedades de algums elemento
+// iniciar a janela de cliente alterrando as propriedades de alguns elementos
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdate.disabled = true
     btnDelete.disabled = true

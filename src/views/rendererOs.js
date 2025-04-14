@@ -1,3 +1,7 @@
+// a constante do foco obtem o elemento html
+
+// const foco = document.getElementById('searchClient')
+
 // Iniciar a janela de clientes alterando as propriedades de alguns elementos
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdate.disabled = true
