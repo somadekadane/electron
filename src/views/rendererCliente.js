@@ -56,6 +56,9 @@ let neighborhoodClient = document.getElementById('inputNeighborhoodClient')
 let cityClient = document.getElementById('inputCityClient')
 let ufClient = document.getElementById('inputUFClient')
 
+// captura do id do cliente
+let id = document.getElementById('idClient')
+
 //==============================================================
 // == Manipulação da tecla Enter ============================
 
@@ -191,6 +194,7 @@ function buscarCliente() {
             arrayClient = dadosCliente
         // extrair os dados do cliente
             arrayClient.forEach((c) =>{
+                id.value = c._id,
                 nameClient.value = c.nomeCliente,
                     cpfClient.value = c.cpfCliente,
                     emailClient.value = c.emailCliente,
@@ -202,6 +206,12 @@ function buscarCliente() {
                     neighborhoodClient.value = c.bairroCliente,
                     cityClient.value = c.cidadeCliente,
                     ufClient.value = c.ufCliente
+
+                    //bloqueio do botao adicionar
+                    btnCreate.disabled = true
+                    // desbloquear dos botoes editar e excluir
+                    btnUpdate.disabled = false
+                    btnDelete.disabled = false
             })
         })    
     }             
@@ -218,6 +228,14 @@ api.setClient((args) => {
 })
 
 // == Fim - CRUD Read =========================================
+
+//== CRUD Delete===========================================
+function excluirCliente() {
+    console.log(id.value) // passo 1 (receber form do ID)
+    api.deleteClient(id.value) // passo 2 (enviar o id ao main)
+}
+
+//== Fim CRUD Delete ======================================
 
 // == Reset Form ==============================================
 function resetForm() {

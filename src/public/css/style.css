@@ -28,6 +28,11 @@
     margin-left: -60px;
 }
 
+/* ocultar o campomdo cliente */
+#idClient {
+    display: none;
+}
+
 /* rodapé */
 footer {
     width: 100%;
