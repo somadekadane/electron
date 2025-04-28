@@ -514,3 +514,51 @@ async function relatorioClientes() {
 }
 
 //== Fim - relatório do clientes =========
+
+// ============================================================
+// == CRUD Read ===============================================
+
+// Validação de busca (preenchimento obrigatório)
+ipcMain.on('validate-search', () => {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: "Atenção!",
+        message: "Preencha o campo de busca",
+        buttons: ['OK']
+    })
+})
+
+ipcMain.on('search-name', async (event, name) => {
+    try {
+        const dataClient = await clientModel.find({
+            nomeCliente: new RegExp(name, 'i')
+        })
+        console.log(dataClient) // teste passos 3 e 4 (importante!)
+
+        // se o vetor estiver vazio [] (cliente não cadastrado)
+        if (dataClient.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: "Aviso",
+                message: "Cliente não cadastrado.\nDeseja cadastrar este cliente?",
+                defaultId: 0, //botão 0
+                buttons: ['Sim', 'Não'] // [0, 1]
+            }).then((result) => {
+                if (result.response === 0) {
+                    // enviar ao renderizador um pedido para setar os campos (recortar do campo de busca e colar no campo nome)
+                    event.reply('set-client')
+                } else {
+                    // limpar o formulário
+                    event.reply('reset-form')
+                }
+            })
+        }
+        // enviando os dados do cliente ao rendererCliente
+        event.reply('render-client', JSON.stringify(dataClient))
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// == Fim - CRUD Read =========================================
+// ============================================================
