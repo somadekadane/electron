@@ -585,3 +585,46 @@ ipcMain.on('delete-client', async (event, id) => {
 })
 
 //== Fim Crud Delete ==========================================
+//=============================================================
+//== Crud Updade ===============================================
+ipcMain.on('update-client', async (event, client) => {
+    try {
+        const updateClient = await clientModel.findByIdAndUpdate(
+            client.idCli,
+            {
+                nomeCliente: client.nameCli,
+                cpfCliente: client.cpfCli,
+                emailCliente: client.emailCli,
+                foneCliente: client.phoneCli,
+                cepCliente: client.cepCli,
+                logradouroCliente: client.addressCli,
+                numeroCliente: client.numberCli,
+                complementoCliente: client.complementCli,
+                bairroCliente: client.neighborhoodCli,
+                cidadeCliente: client.cityCli,
+                ufCliente: client.ufCli  
+            },
+            {
+                new: true
+            }
+        )
+        // mesagem de confirmação
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso!",
+            message: "Dados do cliente alterado com sucesso",
+            buttons: ['OK']
+        }).then ((result) => {
+            if (result.response === 0) {
+                event.reply('reset-form')
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+//== Fim Crud Update ==========================================
+//=============================================================
+

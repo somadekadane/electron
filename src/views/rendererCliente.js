@@ -28,7 +28,7 @@ let arrayClient = []
 const foco = document.getElementById('searchClient')
 
 function teclaEnter(event) {
-    if(event.key === "Enter") {
+    if (event.key === "Enter") {
         event.preventDefault()
         buscarCliente()
     }
@@ -63,7 +63,7 @@ let id = document.getElementById('idClient')
 // == Manipulação da tecla Enter ============================
 
 // Função para manipular o evento da tecla Enter
-function teclaEnter(event){
+function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarCliente()
@@ -139,32 +139,54 @@ frmClient.addEventListener('submit', async (event) => {
     // formularios e reiniciar o docu html
     event.preventDefault()
     // teste Importante (receber dos dados do formulario- passo )
-   //let nameClient = document.getElementById('inputNameClient')
+    //let nameClient = document.getElementById('inputNameClient')
     console.log(nameClient.value, cpfClient.value, emailClient.value,
-    phoneClient.value, cepClient.value, addressClient.value,
-    numberClient.value, complementClient.value, neighborhoodClient.value,
-    cityClient.value, ufClient.value)
+        phoneClient.value, cepClient.value, addressClient.value,
+        numberClient.value, complementClient.value, neighborhoodClient.value,
+        cityClient.value, ufClient.value)
 
-    // Limpa o CPF antes de salvar no banco
-    let cpfSemFormatacao = cpfClient.value.replace(/\D/g, "");
+    if (id.value === "") {
+        // Limpa o CPF antes de salvar no banco
+        let cpfSemFormatacao = cpfClient.value.replace(/\D/g, "");
 
-    //criar um objeto pra armazenar os dados do cliente antes de enviar ao main
-    const client = {
-        nameCli: nameClient.value,
-        cpfCli: cpfClient.value,
-        emailCli: emailClient.value,
-        phoneCli: phoneClient.value,
-        cepCli: cepClient.value,
-        addressCli: addressClient.value,
-        numberCli: numberClient.value,
-        complementCli: complementClient.value,
-        neighborhoodCli: neighborhoodClient.value,
-        cityCli: cityClient.value,
-        ufCli: ufClient.value
+        //criar um objeto pra armazenar os dados do cliente antes de enviar ao main
+        const client = {
+            nameCli: nameClient.value,
+            cpfCli: cpfClient.value,
+            emailCli: emailClient.value,
+            phoneCli: phoneClient.value,
+            cepCli: cepClient.value,
+            addressCli: addressClient.value,
+            numberCli: numberClient.value,
+            complementCli: complementClient.value,
+            neighborhoodCli: neighborhoodClient.value,
+            cityCli: cityClient.value,
+            ufCli: ufClient.value
+        }
+        // enviar ao main o objeto client - passo 2: fluxo
+        // uso do preload.js
+        api.newClient(client)
+    } else {
+        //criar um objeto pra armazenar os dados do cliente antes de enviar ao main
+        // O dev não sabe os dados serão alterados, portanto aviar todos dados)        
+        const client = {
+            idCli: id.value,
+            nameCli: nameClient.value,
+            cpfCli: cpfClient.value,
+            emailCli: emailClient.value,
+            phoneCli: phoneClient.value,
+            cepCli: cepClient.value,
+            addressCli: addressClient.value,
+            numberCli: numberClient.value,
+            complementCli: complementClient.value,
+            neighborhoodCli: neighborhoodClient.value,
+            cityCli: cityClient.value,
+            ufCli: ufClient.value
+        }
+        // enviar ao main o objeto client - passo 2: fluxo
+        // uso do preload.js
+        api.updateClient(client)
     }
-    // enviar ao main o objeto client - passo 2: fluxo
-    // uso do preload.js
-    api.newClient(client)
 })
 
 //== Fim CRUD Create/Update===================================
@@ -188,14 +210,14 @@ function buscarCliente() {
         // recebimento dos dados do cliente
         api.renderClient((event, dataClient) => {
             console.log(dataClient) // teste do passo 5
-        // usar o laço forEach para percorre o vetor e setar os campos (caixas de texto) do formulário
+            // usar o laço forEach para percorre o vetor e setar os campos (caixas de texto) do formulário
             const dadosCliente = JSON.parse(dataClient)
-        // atribuir ao vetor os dados do cliente
+            // atribuir ao vetor os dados do cliente
             arrayClient = dadosCliente
-        // extrair os dados do cliente
-            arrayClient.forEach((c) =>{
+            // extrair os dados do cliente
+            arrayClient.forEach((c) => {
                 id.value = c._id,
-                nameClient.value = c.nomeCliente,
+                    nameClient.value = c.nomeCliente,
                     cpfClient.value = c.cpfCliente,
                     emailClient.value = c.emailCliente,
                     phoneClient.value = c.foneCliente,
@@ -207,14 +229,14 @@ function buscarCliente() {
                     cityClient.value = c.cidadeCliente,
                     ufClient.value = c.ufCliente
 
-                    //bloqueio do botao adicionar
-                    btnCreate.disabled = true
-                    // desbloquear dos botoes editar e excluir
-                    btnUpdate.disabled = false
-                    btnDelete.disabled = false
+                //bloqueio do botao adicionar
+                btnCreate.disabled = true
+                // desbloquear dos botoes editar e excluir
+                btnUpdate.disabled = false
+                btnDelete.disabled = false
             })
-        })    
-    }             
+        })
+    }
 }
 
 // setar o cliente não cadastrado (recortar do campo de busca e colar no campo nome)
