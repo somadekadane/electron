@@ -38,6 +38,8 @@
                         <img src="../public/img/search.png" alt="lupa" width="20">
                     </span>
                 </div>
+                <!-- lista de sugestoes  - estilo google -->
+                 <ul id="viewListSuggestion" class="list-group position-absolute w-100"></ul>
             </div>
 
             <!-- Nome -->
@@ -139,8 +141,9 @@
             <hr class="mt-4 border border-secondary border -1">
             <!-- <div class="mt-3"> </div> -->
             <div class="d-flex justify-content-center gap-1">
+
                 <button type="submit" class="btn btn-success" id="btnCreate">Gerar OS</button>
-                <button type="button" class="btn btn-primary">Buscar OS</button>
+                <button type="button" class="btn btn-primary" onclick="inputOS()">Buscar OS</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar OS</button>
                 <button type="button" class="btn btn-danger" id="btnDelete">Excluir OS</button>
                 <button type="button" class="btn btn-secondary">Imprimir OS</button>

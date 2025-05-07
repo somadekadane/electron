@@ -22,6 +22,9 @@ const { jspdf, default: JsPDF } = require('jspdf')
 // importação da biblioteca fs (nativa do javascript) para manipulação de arquivo
 const fs = require('fs')
 
+// Importação do recurso 'electron-prompt' (dialog de imput)
+const prompt = require('electron-prompt')
+
 // Janela principal
 let win
 const createWindow = () => {
@@ -628,3 +631,46 @@ ipcMain.on('update-client', async (event, client) => {
 //== Fim Crud Update ==========================================
 //=============================================================
 
+//************************************************************/
+//*******************  Ordem de Serviço  *********************/
+//************************************************************/
+
+
+// == Buscar OS ===============================================
+
+ipcMain.on('search-os', (event) => {
+    //console.log("teste: busca OS")
+    prompt({
+        title: 'Buscar OS',
+        label: 'Digite o número da OS:',
+        inputAttrs: {
+            type: 'text'
+        },
+        type: 'input',        
+        width: 400,
+        height: 200
+    }).then((result) => {
+        if (result !== null) {
+            console.log(result)
+            //buscar a os no banco pesquisando pelo valor do result (número da OS)
+
+        } 
+    })
+})
+
+// == Fim - Buscar OS =========================================
+// ============================================================
+
+// == Buscar cliente para vincular na OS (estilo Google)========
+
+ipcMain.on('search-clients', async (event) => {
+    try {
+    const clients = await clientModel.find().sort({ nomeCliente: 1
+    })
+    //console.log(clients) // teste do passo 2
+    event.reply('list-clients', JSON.stringify(clients))
+    } catch (error) {
+        console.log(error)
+    }
+})
+//========Fim Busca cliente (estilo Google) ======================
