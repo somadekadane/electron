@@ -71,3 +71,12 @@ body {
     z-index: 2;
     max-width: 380px;
 }
+
+#viewListSuggestion li {
+    background-color: #E0F0FF;
+}
+
+/* Dados do cliente - OS */
+#inputSearchClient, #viewListSuggestion, #inputIdClient, #inputNameClient, #inputPhoneClient {
+    font-size: 0.9em;
+}

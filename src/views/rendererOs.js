@@ -6,7 +6,7 @@ const suggestionList = document.getElementById('viewListSuggestion')
 //capturar os campos preenchida
 let idClient = document.getElementById('inputidClient')
 let nameClient = document.getElementById('inputNameClient')
-let placaClient = document.getElementById('inputPlacaClient')  // alterei para placa
+let phoneClient = document.getElementById('inputPhoneClient')  // alterei para placa
 
 // vetor usado na manipulaçao (filtragem) dos dados
 let arrayClients = []
@@ -17,6 +17,9 @@ input.addEventListener('input', () => {
     const search = input.value.toLowerCase()
     //console.log(search) // teste de apoio a lógica
     //passo 2: Enviar ao main um pedido de busca de clientes pelo nome (via preload - Api)
+    suggestionList.innerHTML = ""
+
+    // Buscar os nomes dos clientes no banco
     api.searchClients()
 
     //recebimento dos clientes banco de dados (passo 3)
@@ -55,15 +58,17 @@ input.addEventListener('input', () => {
               input.value = ""
               suggestionList.innerHTML = ""  
             })
+            // adiciona os nomes(itens <li>) a lista <ul>
+            suggestionList.appendChild(item)
         })
         
     })
 })
 
 // ocultar a lista ao clicar fora
-document.addEventListener('click', (event) => {
+document.addEventListener('click', (e) => {
     // ocultar a listar se existir e estiver ativa
-    if(!input.contains(event.target) && !suggestionList.contains(event.target)){
+    if(!input.contains(e.target) && !suggestionList.contains(e.target)){
         suggestionList.innerHTML = ""
     }
 })
@@ -89,12 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //captura dos dados dos inputs do formulario (passo 1 fluxo)
 let frmOS = document.getElementById('frmOS')
+let statusOS = document.getElementById('osStatus')
 let descricaoOS = document.getElementById('serviceDescription')
 let materialOS = document.getElementById('inputPecasClient')
 let dataOS = document.getElementById('inputconclusãoClient')
 let orcamentoOS = document.getElementById('inputOrcamentoClient')
 let pagamentoOS = document.getElementById('inputpagamentoClient')
-let statusOS = document.getElementById('osStatus')
+// captura da OS (CRUD Delete e Update)
+let os = document.getElementById('inputOS')
+
 
 // =======================================================
 // == CRUD Creat/Update ==================================
@@ -103,6 +111,10 @@ let statusOS = document.getElementById('osStatus')
 frmOS.addEventListener('submit', async (event) =>{
     //evitar o comportamento padrao do submit que é enviar os dados do formulario
     event.preventDefault()
+
+    if (idClient.value === "") {
+        api.validateClient()
+    } else {
     //Teste importante ( recebimento dos dados do formulario - passo 1 do fluxo)
     console.log(descricaoOS.value, materialOS.value, dataOS.value, orcamentoOS.value, pagamentoOS.value, statusOS.value) 
 
@@ -120,6 +132,16 @@ frmOS.addEventListener('submit', async (event) =>{
     api.newOS(OS) 
 }) 
 // == fim CRUD Creat/Update ==============================
+
+// =============================================================
+// == Busca OS =================================================
+
+function findOS() {
+    api.searchOS()
+}
+
+// == Fim - Busca OS ===========================================
+// =============================================================
 
 // == Reset form =========================================
 function resetForm(){

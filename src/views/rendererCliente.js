@@ -79,7 +79,7 @@ frmClient.addEventListener('keydown', teclaEnter)
 
 // == Fim - manipulação tecla Enter ==========================
 
-// === Função para aplicar máscara no CPF ===
+// === EDER - Função para aplicar máscara no CPF ===
 function aplicarMascaraCPF(campo) {
     let cpf = campo.value.replace(/\D/g, ""); // Remove caracteres não numéricos
 
@@ -130,8 +130,10 @@ function validarCPF() {
 // Adicionar eventos para CPF
 cpfClient.addEventListener("input", () => aplicarMascaraCPF(cpfClient)); // Máscara ao digitar
 cpfClient.addEventListener("blur", validarCPF); // Validação ao perder o foco
+// == Fim - manipulação tecla Enter ==========================
+//============================================================
 
-//== CRUD Create/Update =========================================
+//== CRUD Create/Update ======================================
 
 //==Evento associado ao botao submit(uso das validações do html)
 frmClient.addEventListener('submit', async (event) => {
@@ -142,11 +144,10 @@ frmClient.addEventListener('submit', async (event) => {
     //let nameClient = document.getElementById('inputNameClient')
     console.log(nameClient.value, cpfClient.value, emailClient.value,
         phoneClient.value, cepClient.value, addressClient.value,
-        numberClient.value, complementClient.value, neighborhoodClient.value,
-        cityClient.value, ufClient.value)
+        numberClient.value, complementClient.value, neighborhoodClient.value, cityClient.value, ufClient.value)
 
     if (id.value === "") {
-        // Limpa o CPF antes de salvar no banco
+        // *** EDER **** Limpa o CPF antes de salvar no banco
         let cpfSemFormatacao = cpfClient.value.replace(/\D/g, "");
 
         //criar um objeto pra armazenar os dados do cliente antes de enviar ao main
@@ -244,6 +245,8 @@ api.setClient((args) => {
     // criar uma variável para armazenar o valor digitado no campo de busca (nome ou cpf)
     let campoBusca = document.getElementById('searchClient').value
     // foco no campo de nome do cliente
+    nameClient.focus()
+    // remover o valor digitado no campo de busca
     foco.value = ""
     // preencher o campo de nome do cliente com o nome da busca
     nameClient.value = campoBusca

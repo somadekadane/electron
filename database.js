@@ -16,27 +16,27 @@ const url = 'mongodb+srv://admin:123Senac@projetonode.d0d37.mongodb.net/dbeder'
 // async executar a função de forma assíncrona
 let conectado = false
 // validação (se não estiver conectado, conectar)
-const conectar = async() =>{
-if (!conectado) {
-    // conectar com o banco de dados
-    // try catch - tratamento de exceções
-    try {
-        await mongoose.connect(url) //conectar
-        conectado = true //setar a variável
-        console.log("MongoDB conectado") //inicio
-        return true // para o main identificar a conexao 
-        // estabelecida com sucesso
+const conectar = async () => {
+    if (!conectado) {
+        // conectar com o banco de dados
+        // try catch - tratamento de exceções
+        try {
+            await mongoose.connect(url) //conectar
+            conectado = true //setar a variável
+            console.log("MongoDB conectado") //inicio
+            return true // para o main identificar a conexao 
+            // estabelecida com sucesso
 
-    } catch (error) {
-        // se o código de erro = 8000 (autenticação)
-        if (error.code = 8000) {
-            console.log("Erro de autenticação")
-        } else {
-            console.log(error)
+        } catch (error) {
+            // se o código de erro = 8000 (autenticação)
+            if (error.code = 8000) {
+                console.log("Erro de autenticacao")
+            } else {
+                console.log(error)
+            }
+            return false
         }
-        return false
     }
-}
 }
 
 // método para desconectar o banco de dados
@@ -49,7 +49,7 @@ const desconectar = async () => {
             conectado = false //setar a variável
             console.log("MongoDB desconectado")
             return true // para o main identificar 
-        } 
+        }
         catch (error) {
             console.log(error)
             return false

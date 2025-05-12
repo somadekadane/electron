@@ -438,7 +438,7 @@ async function relatorioClientes() {
         // passo 1: consutar o banco de dados e obter listagem de clientes cadastrados
         const clientes = await clientModel.find().sort({ nomeCliente: 1 })
         // Teste de recebimento da listagem de clientes
-        console.log(clientes)
+        //console.log(clientes)
         //Passso 2: formatação do documento pdf
         // p - portrait | l - landscape | mm a a4 (folha a4 = 210x297mm)
         const doc = new JsPDF('p', 'mm', 'a4')
@@ -578,6 +578,7 @@ ipcMain.on('delete-client', async (event, id) => {
             buttons: ['Cancelar','Excluir'] //0 ou 1
         })
         if (response === 1) {
+            console.log("teste do if de excluir")
             // passo 3 - Excluir o registro de cliente
             const delClient = await clientModel.findByIdAndDelete(id)
             event.reply('reset-form')

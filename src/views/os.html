@@ -31,15 +31,25 @@
 
             <!-- Buscar cliente -->
             <div class="col-md-5">
+
+            </div>
+            <!-- Buscar cliente -->
+            <div class="col-md-4">
                 <label for="inputSearchClient" class="form-label">Buscar Cliente</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="inputSearchClient" spellcheck="false" required maxlength="30">
+                    <input type="text" class="form-control" id="inputSearchClient" spellcheck="false" maxlength="30">
                     <span class="input-group-text">
                         <img src="../public/img/search.png" alt="lupa" width="20">
                     </span>
                 </div>
                 <!-- lista de sugestoes  - estilo google -->
                  <ul id="viewListSuggestion" class="list-group position-absolute w-100"></ul>
+            </div>
+
+            <!-- Id -->
+            <div class="col-md-3">
+                <label for="inputIdClient" class="form-label">Id do cliente</label>
+                <input type="text" class="form-control" id="inputIdClient" spellcheck="false" maxlength="15" disabled>
             </div>
 
             <!-- Nome -->
@@ -54,6 +64,8 @@
                 <input type="text" class="form-control" id="inputPhoneClient" spellcheck="false" maxlength="15"
                     disabled>
             </div>
+
+            <input type="text" id="idClient"> <!-- oculto -->
 
             <!-- CPF -->
             <div class="col-md-4">
