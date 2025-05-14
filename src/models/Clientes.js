@@ -42,7 +42,7 @@ const clienteSchema = new Schema({
     },
     ufCliente: {
         type: String
-    }
+    },
 
 }, {versionKey: false}) //não versionar os dados armazenados
 

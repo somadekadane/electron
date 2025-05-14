@@ -14,7 +14,7 @@ const osSchema = new Schema ({
     idCliente: {
         type: String,        
     },
-    statusOS: {
+    status_OS: {
         type: String
     },
     moto: {

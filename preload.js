@@ -24,4 +24,5 @@ contextBridge.exposeInMainWorld('api', {
     validateClient: () => ipcRenderer.send('validate-client'),
     setSearch: (args) => ipcRenderer.on('set-search', args),
     newOS: (os) => ipcRenderer.send('new-os', os)
+    renderOS: (dataOS) => ipcRenderer.on('render-os', dataOS)
 })

@@ -8,9 +8,12 @@ const path = require('node:path')
 //Importacao do schema clientes
 const { conectar, desconectar } = require("./database.js")
 
+// importar mongoose (validação do id na OS)
+const mongoose = require('mongoose')
+
 const clientModel = require('./src/models/Clientes.js')
 
-// importacao do Schema Moto
+// EDER importacao do Schema Moto
 const motoModel = require('./src/models/Moto.js')
 
 // importacao do Schema OS
@@ -387,49 +390,8 @@ ipcMain.on('new-os', async (event, OS) => {
       console.log(error)
     }
   })
-  // -- Fim - OS - CRUD Create ===========
-
-  // ==========================================
-// == Veiculo - CRUD Create ================
-// recebimento do objeto que contem os dados do cliente
-ipcMain.on('new-moto', async (event, mot) => {
-    // Importante! Teste de recebimento dos dados do cliente
-    console.log(mot)
-    // cadastrar a estrutura de dados no banco de dados usando a classe modelo. Atenção!! os atributos precisam ser identicos ao modelo de dados Clientes.js eos valores sao definidos pelo conteudo do objeto cliente 
-    try {
-      const newMoto = new motoModel({
-        proprietarioMoto: mot.proMot,
-        marcaMoto: mot.marMot,
-        modeloMoto: mot.modMot,
-        anoMoto: mot.anoMot,
-        placaMoto: mot.plaMot,
-        corMoto: mot.corMot,
-        chassiMoto: mot.chasMot
-      })
-      // salvar os dados do cliente no banco de dados
-      await newMoto.save()
-      //Mensagem de confirmação
-      dialog.showMessageBox({
-        //Customização
-        type: 'info',
-        title: "Aviso",
-        message: "Cliente adicionado com sucesso",
-        buttons: ['OK']
-      }).then((result) => {
-        //ação ao precionar o botão 
-        if (result.response === 0) {
-          // enviar um pedido para o renderizador limpar os campos e resetar as 
-          // configurações pré definidas (rótulo) preload.js
-          event.reply('reset-form')
-        }
-  
-      })
-  
-    } catch (error) {
-      console.log(error)
-    }
-  })
-  // -- Fim - Veiculo - CRUD Create ===========
+// -- Fim - OS - CRUD Create ===========
+// ==========================================
 
 //========================================
 // == relatório de clientes ==============
@@ -516,10 +478,54 @@ async function relatorioClientes() {
     }
 }
 
-//== Fim - relatório do clientes =========
+//== Fim - relatório do clientes ==========
+//=========================================
 
-// ============================================================
-// == CRUD Read ===============================================
+// == Veiculo - CRUD Create ================
+// recebimento do objeto que contem os dados do cliente
+ipcMain.on('new-moto', async (event, mot) => {
+    // Importante! Teste de recebimento dos dados do cliente
+    console.log(mot)
+    // cadastrar a estrutura de dados no banco de dados usando a classe modelo. Atenção!! os atributos precisam ser identicos ao modelo de dados Clientes.js eos valores sao definidos pelo conteudo do objeto cliente 
+    try {
+      const newMoto = new motoModel({
+        proprietarioMoto: mot.proMot,
+        marcaMoto: mot.marMot,
+        modeloMoto: mot.modMot,
+        anoMoto: mot.anoMot,
+        placaMoto: mot.plaMot,
+        corMoto: mot.corMot,
+        chassiMoto: mot.chasMot
+      })
+      // salvar os dados do cliente no banco de dados
+      await newMoto.save()
+      //Mensagem de confirmação
+      dialog.showMessageBox({
+        //Customização
+        type: 'info',
+        title: "Aviso",
+        message: "Cliente adicionado com sucesso",
+        buttons: ['OK']
+      }).then((result) => {
+        //ação ao precionar o botão 
+        if (result.response === 0) {
+          // enviar um pedido para o renderizador limpar os campos e resetar as 
+          // configurações pré definidas (rótulo) preload.js
+          event.reply('reset-form')
+        }
+  
+      })
+  
+    } catch (error) {
+      console.log(error)
+    }
+  })
+// -- Fim - Veiculo - CRUD Create =====================
+//=====================================================
+
+
+// ====================================================
+// == CRUD Read =======================================
 
 // Validação de busca (preenchimento obrigatório)
 ipcMain.on('validate-search', () => {
@@ -558,20 +564,21 @@ ipcMain.on('search-name', async (event, name) => {
         }
         // enviando os dados do cliente ao rendererCliente
         event.reply('render-client', JSON.stringify(dataClient))
+
     } catch (error) {
         console.log(error)
     }
 })
-
 // == Fim - CRUD Read =========================================
 // ============================================================
 
+//=============================================================
 //== Crud Delete ==============================================
 ipcMain.on('delete-client', async (event, id) => {
     console.log(id) // teste do passo 2 (recebimento do id)
     try {
         // importante - confirmar a exclusao
-        const {response} = await dialog.showMessageBox(client, {
+        const { response } = await dialog.showMessageBox(client, {
             type: 'warning',
             title: "Atenção!",
             message: "Deseja excluir este cliente\nEsta ação não poderá ser desfeita.",
@@ -587,12 +594,16 @@ ipcMain.on('delete-client', async (event, id) => {
         console.log(error)
     }
 })
-
 //== Fim Crud Delete ==========================================
 //=============================================================
-//== Crud Updade ===============================================
+
+
+//=============================================================
+//== Crud Updade ==============================================
 ipcMain.on('update-client', async (event, client) => {
+    console.log(client) //teste importante (recebimento dos dados do cliente)
     try {
+        // criar uma nova de estrutura de dados usando a classe modelo.
         const updateClient = await clientModel.findByIdAndUpdate(
             client.idCli,
             {
@@ -623,6 +634,7 @@ ipcMain.on('update-client', async (event, client) => {
                 event.reply('reset-form')
             }
         })
+
     } catch (error) {
         console.log(error)
     }
@@ -630,37 +642,10 @@ ipcMain.on('update-client', async (event, client) => {
 
 
 //== Fim Crud Update ==========================================
-//=============================================================
 
 //************************************************************/
 //*******************  Ordem de Serviço  *********************/
 //************************************************************/
-
-
-// == Buscar OS ===============================================
-
-ipcMain.on('search-os', (event) => {
-    //console.log("teste: busca OS")
-    prompt({
-        title: 'Buscar OS',
-        label: 'Digite o número da OS:',
-        inputAttrs: {
-            type: 'text'
-        },
-        type: 'input',        
-        width: 400,
-        height: 200
-    }).then((result) => {
-        if (result !== null) {
-            console.log(result)
-            //buscar a os no banco pesquisando pelo valor do result (número da OS)
-
-        } 
-    })
-})
-
-// == Fim - Buscar OS =========================================
-// ============================================================
 
 // == Buscar cliente para vincular na OS (estilo Google)========
 
@@ -675,3 +660,115 @@ ipcMain.on('search-clients', async (event) => {
     }
 })
 //========Fim Busca cliente (estilo Google) ======================
+//================================================================
+
+// ============================================================
+// == CRUD Create - Gerar OS ==================================
+
+// Validação de busca (preenchimento obrigatório Id Cliente-OS)
+ipcMain.on('validate-client', (event) => {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: "Aviso!",
+        message: "É obrigatório vincular o cliente na Ordem de Serviço",
+        buttons: ['OK']
+    }).then((result) => {
+        //ação ao pressionar o botão (result = 0)
+        if (result.response === 0) {
+            event.reply('set-search')
+        }
+    })
+})
+
+ipcMain.on('new-os', async (event, os) => {
+    //importante! teste de recebimento dos dados da os (passo 2)
+    console.log(os)
+    // Cadastrar a estrutura de dados no banco de dados MongoDB
+    try {
+        // criar uma nova de estrutura de dados usando a classe modelo. Atenção! Os atributos precisam ser idênticos ao modelo de dados OS.js e os valores são definidos pelo conteúdo do objeto os
+        const newOS = new osModel({
+            idCliente: os.idClient_OS,
+            statusOS: os.stat_OS,
+            computador: os.computer_OS,
+            serie: os.serial_OS,
+            problema: os.problem_OS,
+            tecnico: os.specialist_OS,
+            diagnostico: os.diagnosis_OS,
+            pecas: os.parts_OS,
+            valor: os.total_OS
+        })
+        // salvar os dados da OS no banco de dados
+        await newOS.save()
+        // Mensagem de confirmação
+        dialog.showMessageBox({
+            //customização
+            type: 'info',
+            title: "Aviso",
+            message: "OS gerada com sucesso",
+            buttons: ['OK']
+        }).then((result) => {
+            //ação ao pressionar o botão (result = 0)
+            if (result.response === 0) {
+                //enviar um pedido para o renderizador limpar os campos e resetar as configurações pré definidas (rótulo 'reset-form' do preload.js
+                event.reply('reset-form')
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// == Fim - CRUD Create - Gerar OS ===========================
+
+
+// ============================================================
+// == Buscar OS - CRUD Read ===================================
+
+ipcMain.on('search-os', async (event) => {
+    //console.log("teste: busca OS")
+    prompt({
+        title: 'Buscar OS',
+        label: 'Digite o número da OS:',
+        inputAttrs: {
+            type: 'text'
+        },
+        type: 'input',        
+        width: 400,
+        height: 200
+    }).then(async (result) => {
+        // buscar OS pelo id (verificar formato usando o mongoose - importar no início do main)
+        if (result !== null) {
+            // Verificar se o ID é válido (uso do mongoose - não esquecer de importar)
+            if (mongoose.Types.ObjectId.isValid(result)) {
+                try {
+                    const dataOS = await osModel.findById(result)
+                    if (dataOS) {
+                        console.log(dataOS) // teste importante
+                        // enviando os dados da OS ao rendererOS
+                        // OBS: IPC só trabalha com string, então é necessário converter o JSON para string JSON.stringify(dataOS)
+                        event.reply('render-os', JSON.stringify(dataOS))
+                    } else {
+                        dialog.showMessageBox({
+                            type: 'warning',
+                            title: "Aviso!",
+                            message: "OS não encontrada",
+                            buttons: ['OK']
+                        })
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            } else {
+                dialog.showMessageBox({
+                    type: 'error',
+                    title: "Atenção!",
+                    message: "Formato do número da OS inválido.\nVerifique e tente novamente.",
+                    buttons: ['OK']
+                })
+            }
+        }
+    })
+})
+
+// == Fim - Buscar OS - CRUD Read =============================
+// ============================================================
