@@ -49,6 +49,7 @@ const desconectar = async () => {
             conectado = false //setar a variável
             console.log("MongoDB desconectado")
             return true // para o main identificar 
+            
         } catch (error) {
             console.log(error)
             return false

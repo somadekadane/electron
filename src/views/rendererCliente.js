@@ -74,6 +74,7 @@ function teclaEnter(event) {
 function restaurarEnter() {
     frmClient.removeEventListener('keydown', teclaEnter)
 }
+
 // "Escuta do evento Tecla Enter"
 frmClient.addEventListener('keydown', teclaEnter)
 
@@ -131,7 +132,7 @@ function validarCPF() {
 cpfClient.addEventListener("input", () => aplicarMascaraCPF(cpfClient)); // Máscara ao digitar
 cpfClient.addEventListener("blur", validarCPF); // Validação ao perder o foco
 // == Fim - manipulação tecla Enter ==========================
-//============================================================
+
 
 //== CRUD Create/Update ======================================
 
@@ -144,7 +145,7 @@ frmClient.addEventListener('submit', async (event) => {
     //let nameClient = document.getElementById('inputNameClient')
     console.log(nameClient.value, cpfClient.value, emailClient.value,
         phoneClient.value, cepClient.value, addressClient.value,
-        numberClient.value, complementClient.value, neighborhoodClient.value, cityClient.value, ufClient.value)
+        numberClient.value, complementClient.value, neighborhoodClient.value, cityClient.value, ufClient.value, id.value)
 
     if (id.value === "") {
         // *** EDER **** Limpa o CPF antes de salvar no banco
@@ -189,7 +190,6 @@ frmClient.addEventListener('submit', async (event) => {
         api.updateClient(client)
     }
 })
-
 //== Fim CRUD Create/Update===================================
 
 // ============================================================
@@ -251,7 +251,6 @@ api.setClient((args) => {
     // preencher o campo de nome do cliente com o nome da busca
     nameClient.value = campoBusca
 })
-
 // == Fim - CRUD Read =========================================
 
 //== CRUD Delete===========================================

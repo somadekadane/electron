@@ -73,7 +73,7 @@
             <!-- Status -->
             <div class="col-md-4">
                 <label class="form-label">Status da OS</label>
-                <select class="form-select" id="osStatus">
+                <select class="form-select" id="inputStatus">
                     <option value="">Selecione</option>
                     <option>Aberta</option>
                     <option>Em andamento</option>
@@ -89,6 +89,12 @@
                 <input type="text" class="form-control" id="inputCPFClient" spellcheck="false" maxlength="15" disabled>
             </div>            
             -->
+            <!-- Motocicleta -->
+            <div class="col-md-8">
+                <label class="form-label" for="inputComputer">Motocicleta</label>
+                <input type="text" class="form-control" id="inputComputer" maxlength="30" required>
+            </div>
+
             <!-- Descrição do Serviço -->
             <div class="col-md-12">
                 <label for="serviceDescription" class="form-label">Descrição do Serviço</label>
@@ -125,32 +131,13 @@
                     <option>Boleto</option>
                 </select>
                </div>
-
+               
+               <!-- Valor do serviço -->
+            <div class="col-md-3">
+                <label class="form-label" for="inputTotal">Valor</label>
+                <input type="text" class="form-control" id="inputTotal" maxlength="20" >
+            </div>
             
-            <!--
-            <div class="mb-3">
-                <label class="form-label">Equipamento</label>
-                <input type="text" class="form-control" id="txtOsEquip">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Defeito</label>
-                <input type="text" class="form-control" id="txtOsDef">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Serviço</label>
-                <input type="text" class="form-control" id="txtOsServ">
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Técnico</label>
-                    <input type="text" class="form-control" id="txtOsTec">
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">Valor Total</label>
-                    <input type="text" class="form-control" id="txtOsValor" value="0">
-                </div>
-            </div>
-        -->
             <!-- Linha -->
             <hr class="mt-4 border border-secondary border -1">
             <!-- <div class="mt-3"> </div> -->

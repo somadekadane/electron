@@ -7,7 +7,7 @@ const { model, Schema } = require('mongoose')
 
 // criação da estrutura da coleção OS
 const osSchema = new Schema ({
-    dataOS: {
+    dataEntrada: {
         type: Date,
         default: Date.now
     },

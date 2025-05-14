@@ -6,10 +6,9 @@ const suggestionList = document.getElementById('viewListSuggestion')
 //capturar os campos preenchida
 let idClient = document.getElementById('inputidClient')
 let nameClient = document.getElementById('inputNameClient')
-let phoneClient = document.getElementById('inputPhoneClient')  // alterei para placa
+let phoneClient = document.getElementById('inputPhoneClient')  
 
-// vetor usado na manipulaçao (filtragem) dos dados
-let arrayClients = []
+let arrayClients = [] // vetor usado na manipulaçao (filtragem) dos dados
 
 // captura em tempo real do input(digitação de caracteres na busca)
 input.addEventListener('input', () => {
@@ -24,11 +23,8 @@ input.addEventListener('input', () => {
 
     //recebimento dos clientes banco de dados (passo 3)
     api.listClients((event, clients) => {
-        //console.log(clients) // teste
-        // converter para json os dados dos clientes recebidos
-        const dataClients = JSON.parse(clients)
-        // armazenar o vetor os dados do clientes
-        arrayClients = dataClients
+        const dataClientes = JSON.parse(clients)
+        arrayClients = dataClientes
         //Passo 4: filtrar os dados dos clientes extraindo nomes
         // que tenham relação com os caracteres digitando busca tempo real
         const results = arrayClients.filter(c =>
@@ -39,17 +35,14 @@ input.addEventListener('input', () => {
         suggestionList.innerHTML = ""
         // para cada resultao gerar um item da lista <li>
         results.forEach(c => {
-            // criar elemento
             const item = document.createElement('li')
-            // adic classes boostrap a ca li criado
             item.classList.add('list-group-item', 'list-group-item-action')
-            //exibir 
             item.textContent = c.nomeCliente
 
             // adicionar os li's lista ul
-            suggestionList.appendChild(item)
+            //suggestionList.appendChild(item)
 
-            //aicionar um evento de clique no item da lista pra preencher os campos formulario
+            //adicionar um evento de clique no item da lista pra preencher os campos formulario
             item.addEventListener('click', () => {
               idClient.value = c._id
               nameClient.value = c.nomeCliente
@@ -64,18 +57,20 @@ input.addEventListener('input', () => {
         
     })
 })
+// setar o foco no campo de busca (validação de busca do cliente obrigatória)
+api.setSearch((args) => {
+    input.focus()
+})
 
 // ocultar a lista ao clicar fora
 document.addEventListener('click', (e) => {
     // ocultar a listar se existir e estiver ativa
-    if(!input.contains(e.target) && !suggestionList.contains(e.target)){
+    if(!input.contains(e.target) && !suggestionList.contains(e.target)) {
         suggestionList.innerHTML = ""
     }
 })
-
 // == fim busca avançada ==============================
-
-// buscar OS ======================================
+//=====================================================
 
 function inputOS() {
     // console log("Teste")
@@ -92,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
     foco.focus()
 })
 
+// criar um vetor para manipulação dos dados da OS
+let arrayOS = []
+
 //captura dos dados dos inputs do formulario (passo 1 fluxo)
 let frmOS = document.getElementById('frmOS')
 let statusOS = document.getElementById('osStatus')
@@ -101,8 +99,9 @@ let dataOS = document.getElementById('inputconclusãoClient')
 let orcamentoOS = document.getElementById('inputOrcamentoClient')
 let pagamentoOS = document.getElementById('inputpagamentoClient')
 // captura da OS (CRUD Delete e Update)
-let os = document.getElementById('inputOS')
-
+let idos = document.getElementById('inputOS')
+// captura do id do campo data
+let dateOS = document.getElementById('inputData')
 
 // =======================================================
 // == CRUD Creat/Update ==================================
@@ -117,7 +116,7 @@ frmOS.addEventListener('submit', async (event) =>{
     } else {
     //Teste importante ( recebimento dos dados do formulario - passo 1 do fluxo)
     console.log(descricaoOS.value, materialOS.value, dataOS.value, orcamentoOS.value, pagamentoOS.value, statusOS.value) 
-
+    if (os.value === "") {
     // Criar um objeto para armazenar os dados do cliente amtes de enviar ao main
     const OS = {
         desOS: descricaoOS.value,
@@ -126,31 +125,64 @@ frmOS.addEventListener('submit', async (event) =>{
         orcOS: orcamentoOS.value,
         pagOS: pagamentoOS.value,
         staOS: statusOS.value
-    }
+    } 
     // Enviar ao main o objeto client - (Passo 2: fluxo)
     // uso do preload.js
     api.newOS(OS) 
+} else {
+    //Editar OS
+
+}
+}
 }) 
 // == fim CRUD Creat/Update ==============================
 
 // =============================================================
-// == Busca OS =================================================
+// == Busca OS - CRUD Raad ======================================
 
 function findOS() {
     api.searchOS()
 }
 
-// == Fim - Busca OS ===========================================
-// =============================================================
+api.renderOS((event, dataOS) => {
+    console.log(dataOS)
+    const os = JSON.parse(dataOS)
+    // preencher os campos com os dados da OS
+    idOS.value = os._id
+    // formatar data:
+    const data = new Date(os.dataEntrada)
+    const formatada = data.toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    })
+    dateOS.value = formatada
+    idClient.value = os.idCliente
+    statusOS.value = os.status
+    computer.value = os.computador
+    serial.value = os.serie
+    problem.value = os.problema
+    specialist.value = os.tecnico
+    diagnosis.value = os.diagnostico
+    parts.value = os.pecas
+    total.value = os.valor
+})
 
-// == Reset form =========================================
+// == Fim - Buscar OS - CRUD Read ==========================
+
+
+// =========================================================
+// == Reset form ===========================================
 function resetForm(){
     //Limpar os campos e resetar o formulario com as configurações pré definidas
     location.reload()
 }
 
 // Recebimento do pedido do main para resetar o formulario
-api.resetForm((args)=>{
+api.resetForm((args) => {
     resetForm()
 })
 
