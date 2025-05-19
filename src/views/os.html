@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ordem de Serviço</title>
+    <title>Ordem de serviço</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- CSS personalizado -->
@@ -20,13 +20,13 @@
             <!-- OS -->
             <div class="col-md-4">
                 <label class="form-label" for="txtOs">Nº OS</label>
-                <input type="text" class="form-control" id="txtOs" disabled>
+                <input type="text" class="form-control" id="inputOS" disabled>
             </div>
 
             <!-- Data -->
             <div class="col-md-3">
                 <label class="form-label" for="txtData">Data</label>
-                <input type="text" class="form-control" id="txtData" disabled>
+                <input type="text" class="form-control" id="inputData" disabled>
             </div>
 
             <!-- Buscar cliente -->
@@ -135,20 +135,20 @@
                <!-- Valor do serviço -->
             <div class="col-md-3">
                 <label class="form-label" for="inputTotal">Valor</label>
-                <input type="text" class="form-control" id="inputTotal" maxlength="20" >
+                <input type="number" class="form-control" id="inputTotal" step="0.01" min="0">
             </div>
             
             <!-- Linha -->
-            <hr class="mt-4 border border-secondary border -1">
+            <!--<hr class="mt-4 border border-secondary border -1"> -->
             <!-- <div class="mt-3"> </div> -->
              
-            <div class="mt-4 d-flex justify-content-center gap-1">
-                <button type="submit" class="btn btn-success" id="btnCreate">Gerar OS</button>
-                <button type="button" class="btn btn-primary" onclick="inputOS()">Buscar OS</button>
+            <div class="mt-5 d-flex justify-content-center gap-1">
+                <button type="submit" class="btn btn-success" id="btnCreate">Gerar OS</button>                
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar OS</button>
                 <button type="button" class="btn btn-danger" id="btnDelete">Excluir OS</button>
+                <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
+                <button type="button" class="btn btn-primary" onclick="findOS()" id="btnBuscaOS">Buscar OS</button>
                 <button type="button" class="btn btn-secondary">Imprimir OS</button>
-                <button type="reset" class="btn" id="btnReset" onclick="resetFrom()"></button>
         </form>
     </div>
 
