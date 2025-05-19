@@ -4,6 +4,7 @@
  */
 
 // importação do mongoose
+const { connect } = require('http2')
 const mongoose = require('mongoose')
 
 // configuração do acesso ao banco de dados
@@ -16,7 +17,7 @@ const url = 'mongodb+srv://admin:123Senac@projetonode.d0d37.mongodb.net/dbeder'
 // async executar a função de forma assíncrona
 let conectado = false
 // validação (se não estiver conectado, conectar)
-const conectar = async () => {
+const conectar = async() => {
     if (!conectado) {
         // conectar com o banco de dados
         // try catch - tratamento de exceções
@@ -40,7 +41,7 @@ const conectar = async () => {
 }
 
 // método para desconectar o banco de dados
-const desconectar = async () => {
+const desconectar = async() => {
     // validação (se estiver conectado, desconectar)
     if (conectado) {
         // desconectar do banco de dados        

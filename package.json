@@ -4,8 +4,8 @@
   "description": "Desenvolvimento de um sistema desktop para gestão de ordem de serviços de uma oficina de motos.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/somadekadane/electron#readme",
   "devDependencies": {
-    "electron": "^35.3.0"
+    "electron": "^35.4.0"
   },
   "dependencies": {
     "boolean": "^3.2.0",
@@ -84,6 +84,9 @@
     "universalify": "^0.1.2",
     "wrappy": "^1.0.2",
     "yauzl": "^2.10.0"
+  },
+  "directories": {
+    "doc": "doc"
   },
   "keywords": []
 }
