@@ -28,7 +28,7 @@ const motoSchema = new Schema ({
     chassiMoto: {
         type: String
     }
-}, {versionKey: false}) // não versionar os dados armazenados 
+}, {versionKey: false})
 
 // exportar para o main o modulo de dados
 //OBS: Clientes será o nome da coleção Tabelas
