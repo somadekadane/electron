@@ -93,7 +93,7 @@
             <!-- Orçamento do serviço -->
             <div class="col-md-3">
                 <label class="form-label" for="inputTotal">Valor</label>
-                <input type="number" class="form-control" id="inputTotal" step="0.01" min="0">
+                <input type="text" class="form-control" id="inputTotal" step="0.01" min="0">
                </div>
 
             <!-- Forma de pagamento -->
@@ -130,7 +130,7 @@
                 <button type="button" class="btn btn-primary" onclick="findOS()" >Buscar OS</button>              
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar OS</button>
                 <button type="button" class="btn btn-danger" id="btnDelete">Excluir OS</button>  
-                <button type="button" class="btn btn-secondary">Imprimir OS</button>
+                <button type="button" class="btn btn-secondary" onclick="generateOS()">Imprimir OS</button>
                 <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
         </form>
     </div>

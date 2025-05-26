@@ -75,10 +75,10 @@ document.addEventListener('click', (e) => {
 // == fim busca avançada ==============================
 //=====================================================
 
-// const foco = document.getElementById('searchClient')
+const foco = document.getElementById('searchClient')
 
-/* Iniciar a janela de clientes alterando as propriedades de alguns elementos
-document.addEventListener('DOMContentLoaded', () => {
+//Iniciar a janela de clientes alterando as propriedades de alguns elementos
+/*document.addEventListener('DOMContentLoaded', () => {
     btnUpdate.disabled = true
     btnDelete.disabled = true
     // Foco na busca do cliente
@@ -114,35 +114,36 @@ frmOS.addEventListener('submit', async (event) => {
     api.validateClient();
   } else {
     //Teste importante ( recebimento dos dados do formulario - passo 1 do fluxo)
-    console.log(
-      idOS.value,
-      idClient.value,
-      descricaoOS.value,
-      materialOS.value,
-      dataOS.value,
-      orcamentoOS.value,
-      pagamentoOS.value,
-      statusOS.value
-    );
-    if (idOS.value === "") {
-      // Criar um objeto para armazenar os dados do cliente amtes de enviar ao main
-      const OS = {
-        idClient_OS: idClient.value,
-        desOS: descricaoOS.value,
-        matOS: materialOS.value,
-        datOS: dataOS.value,
-        orcOS: orcamentoOS.value,
-        pagOS: pagamentoOS.value,
-        staOS: statusOS.value,
-      };
-      // Enviar ao main o objeto client - (Passo 2: fluxo)
-      // uso do preload.js
-      api.newOS(OS);
-    } else {
-      //Editar OS
-    }
-  }
+    //console.log(
+     // _idClient_OS: idClient.value,
+      //desOS: descricaoOS.value,
+     // matOS: materialOS.value,
+     // datOS: dataOS.value,
+     //orcOS: orcamentoOS.value,
+     // pagOS: pagamentoOS.value,
+//staOS: statusOS.value,
+
+if (idos.value === "") {
+  // Criar um objeto para armazenar os dados do cliente amtes de enviar ao main
+  const OS = {
+  _id: idos.value,
+    idClient_OS: idClient.value,
+    desOS: descricaoOS.value,
+    matOS: materialOS.value,
+    datOS: dataOS.value,
+    orcOS: orcamentoOS.value,
+    pagOS: pagamentoOS.value,
+    staOS: statusOS.value,
+  };
+  // Enviar ao main o objeto client - (Passo 2: fluxo)
+  // uso do preload.js
+  api.newOS(OS);
+} else {
+  //Editar OS
+}
+}
 });
+      
 // == fim CRUD Creat/Update ===================================
 
 // =============================================================
@@ -190,4 +191,12 @@ api.resetForm((args) => {
   resetForm();
 });
 // == Fim - Reset form ===================================
+// =======================================================
+
+// =======================================================
+// == Imprimir OS ========================================
+function generateOS() {
+api.printOS();
+}
+// == Fim - Imprimir OS ==================================
 // =======================================================
