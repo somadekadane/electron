@@ -14,31 +14,27 @@ const osSchema = new Schema ({
     idCliente: {
         type: String,        
     },
-    status_OS: {
+    nome: {
+        type: String,        
+    },
+    descricao: {
         type: String
     },
-    moto: {
+    material: {
         type: String
-    }, //computador
-    placa: {
-        type: String        
-    }, //serie
-    problema: {
-        type: String  
     },
-    tecnico: {
-        type: String  
+    data: {
+        type: String
     },
-    diagnostico: {
-        type: String  
+    orcamento: {
+        type: String
     },
-    pecas: {
-        type: String 
+    pagamento: {
+        type: String
     },
-    valor: {
-        type: String 
-    },
-   
+    status: {
+        type: String
+    }   
 }, {versionKey: false}) // não versionar os dados armazenados 
 
 // exportar para o main o moulo de dados

@@ -16,6 +16,7 @@ let placaMoto = document.getElementById('inputPlacaClient')
 let corMoto = document.getElementById('inputCorClient')
 let chassiMoto = document.getElementById('inputChassiClient')
 
+// =======================================================
 // == CRUD Creat/Update ==================================
 
 // Evento associado ao botão submit 
@@ -41,6 +42,7 @@ frmMoto.addEventListener('submit', async (event) =>{
 }) 
 // == fim CRUD Creat/Update ==============================
 
+//========================================================
 // == Reset form =========================================
 function resetForm(){
     //Limpar os campos e resetar o formulario com as configurações pré definidas
@@ -51,6 +53,4 @@ function resetForm(){
 api.resetForm((args)=>{
     resetForm()
 })
-
 // == Fim - Reset form ===================================
-// =======================================================

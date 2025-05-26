@@ -10,6 +10,10 @@ function buscarCEP() {
     fetch(urlAPI)
         .then(response => response.json())
         .then(dados => {
+            if (dados.erro) {
+                alert("CEP não encontrado.");
+                return;
+            }
             //extração dos dados
             document.getElementById('inputAddressClient').value = dados.logradouro
             document.getElementById('inputNeighborhoodClient').value = dados.bairro
@@ -131,11 +135,15 @@ function validarCPF() {
 // Adicionar eventos para CPF
 cpfClient.addEventListener("input", () => aplicarMascaraCPF(cpfClient)); // Máscara ao digitar
 cpfClient.addEventListener("blur", validarCPF); // Validação ao perder o foco
+
+// Limpar o CPF
+let cpfSemFormatacao = cpfClient.value.replace(/\D/g, "");
+
 // == Fim - manipulação tecla Enter ==========================
 
 
+//============================================================
 //== CRUD Create/Update ======================================
-
 //==Evento associado ao botao submit(uso das validações do html)
 frmClient.addEventListener('submit', async (event) => {
     // evitar o comportamento padrao do submit que é enviar os
@@ -143,18 +151,16 @@ frmClient.addEventListener('submit', async (event) => {
     event.preventDefault()
     // teste Importante (receber dos dados do formulario- passo )
     //let nameClient = document.getElementById('inputNameClient')
+    let cpfSemFormatacao = cpfClient.value.replace(/\D/g, "");
     console.log(nameClient.value, cpfClient.value, emailClient.value,
         phoneClient.value, cepClient.value, addressClient.value,
         numberClient.value, complementClient.value, neighborhoodClient.value, cityClient.value, ufClient.value, id.value)
 
     if (id.value === "") {
-        // *** EDER **** Limpa o CPF antes de salvar no banco
-        let cpfSemFormatacao = cpfClient.value.replace(/\D/g, "");
-
         //criar um objeto pra armazenar os dados do cliente antes de enviar ao main
         const client = {
             nameCli: nameClient.value,
-            cpfCli: cpfClient.value,
+            cpfCli: cpfSemFormatacao,
             emailCli: emailClient.value,
             phoneCli: phoneClient.value,
             cepCli: cepClient.value,
@@ -174,7 +180,7 @@ frmClient.addEventListener('submit', async (event) => {
         const client = {
             idCli: id.value,
             nameCli: nameClient.value,
-            cpfCli: cpfClient.value,
+            cpfCli: cpfSemFormatacao,
             emailCli: emailClient.value,
             phoneCli: phoneClient.value,
             cepCli: cepClient.value,
@@ -191,6 +197,7 @@ frmClient.addEventListener('submit', async (event) => {
     }
 })
 //== Fim CRUD Create/Update===================================
+
 
 // ============================================================
 // == Inicio CRUD Read ========================================
@@ -229,7 +236,6 @@ function buscarCliente() {
                     neighborhoodClient.value = c.bairroCliente,
                     cityClient.value = c.cidadeCliente,
                     ufClient.value = c.ufCliente
-
                 //bloqueio do botao adicionar
                 btnCreate.disabled = true
                 // desbloquear dos botoes editar e excluir
@@ -243,34 +249,48 @@ function buscarCliente() {
 // setar o cliente não cadastrado (recortar do campo de busca e colar no campo nome)
 api.setClient((args) => {
     // criar uma variável para armazenar o valor digitado no campo de busca (nome ou cpf)
-    let campoBusca = document.getElementById('searchClient').value
-    // foco no campo de nome do cliente
-    nameClient.focus()
-    // remover o valor digitado no campo de busca
-    foco.value = ""
-    // preencher o campo de nome do cliente com o nome da busca
-    nameClient.value = campoBusca
+    let campoBusca = document.getElementById('searchClient').value.trim()
+     if (/^\d{11}$/.test(campoBusca)) {
+        // É um número → CPF
+        cpfClient.focus()
+        foco.value = ""
+        cpfClient.value = campoBusca
+    }
+    else if (/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(campoBusca)) {
+        cpfClient.focus()
+        foco.value = ""
+        cpfClient.value = campoBusca
+    }
+    else {
+        // foco no campo de nome do cliente
+        nameClient.focus()
+        // remover o valor digitado no campo de busca
+        foco.value = ""
+        // preencher o campo de nome do cliente com o nome da busca
+        nameClient.value = campoBusca
+    }    
 })
-// == Fim - CRUD Read =========================================
+// == Fim - CRUD Read ========================================
 
-//== CRUD Delete===========================================
+
+//== CRUD Delete==============================================
 function excluirCliente() {
     console.log(id.value) // passo 1 (receber form do ID)
     api.deleteClient(id.value) // passo 2 (enviar o id ao main)
 }
+//== Fim CRUD Delete =========================================
 
-//== Fim CRUD Delete ======================================
 
-// == Reset Form ==============================================
+// ===========================================================
+// == Reset Form =============================================
 function resetForm() {
     // limpar os campos e resetar o furmulario com as configurações
     location.reload()
-    //
 }
+
 // recebimento do pedido do main pra resetar o form
 api.resetForm((args) => {
     resetForm()
 })
-
 // ====Fim do  reset form ==================================
 //==========================================================

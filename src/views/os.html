@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ordem de serviço</title>
+    <title>Ordem de Serviço</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- CSS personalizado -->
@@ -19,20 +19,16 @@
 
             <!-- OS -->
             <div class="col-md-4">
-                <label class="form-label" for="txtOs">Nº OS</label>
+                <label class="form-label">Nº da Ordem</label>
                 <input type="text" class="form-control" id="inputOS" disabled>
             </div>
 
             <!-- Data -->
             <div class="col-md-3">
-                <label class="form-label" for="txtData">Data</label>
+                <label class="form-label">Data Entrada</label>
                 <input type="text" class="form-control" id="inputData" disabled>
             </div>
 
-            <!-- Buscar cliente -->
-            <div class="col-md-5">
-
-            </div>
             <!-- Buscar cliente -->
             <div class="col-md-4">
                 <label for="inputSearchClient" class="form-label">Buscar Cliente</label>
@@ -67,13 +63,56 @@
 
             <input type="text" id="idClient"> <!-- oculto -->
 
+            <!--CPF--> 
+            <div class="col-md-4 ">
+                <label for="inputCPFClient" class="form-label">CPF/CNPJ</label>
+                <input type="text" class="form-control" id="inputCPFClient" spellcheck="false" maxlength="15" disabled>
+            </div> 
+
             <!-- Linha -->
             <hr class="mt-4 border border-secondary border -1">
 
+            <!-- Descrição do Serviço -->
+            <div class="col-md-12">
+                <label for="serviceDescription" class="form-label">Observações / Ocorrências</label>
+                <textarea class="form-control" id="serviceDescription" rows="3" maxlength="200" required></textarea>
+            </div>
+
+            <!-- Materiais utilizados -->
+            <div class="col-md-12">
+                <label for="inputPecasClient" class="form-label">Serviço Executado</label>
+                <input type="text" class="form-control" id="inputPecasClient" spellcheck="false" required maxlength="60">
+               </div>
+
+            <!-- Data de conclusão -->
+            <div class="col-md-3">
+                <label for="inputconclusãoClient" class="form-label">Data Saída</label>
+                <input type="text" class="form-control" id="inputconclusãoClient" spellcheck="false" required maxlength="30">
+               </div>
+
+            <!-- Orçamento do serviço -->
+            <div class="col-md-3">
+                <label for="inputOrcamentoClient" class="form-label">Orçamento do serviço</label>
+                <input type="text" class="form-control" id="inputOrcamentoClient" spellcheck="false" required maxlength="30">
+               </div>
+
+            <!-- Forma de pagamento -->
+            <div class="col-md-3">
+                <label for="inputpagamentoClient" class="form-label">Forma de pagamento</label>
+                <select type="text" class="form-select" id="inputpagamentoClient" spellcheck="false" required maxlength="20">
+                    <option value="">Pagamento</option>
+                    <option>Pix</option>
+                    <option>Cartão Débito</option>
+                    <option>Cartão Crédito</option>
+                    <option>Dinheiro</option>
+                    <option>Boleto</option>
+                </select>
+               </div>
+
             <!-- Status -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label">Status da OS</label>
-                <select class="form-select" id="inputStatus">
+                <select class="form-select" id="osStatus">
                     <option value="">Selecione</option>
                     <option>Aberta</option>
                     <option>Em andamento</option>
@@ -82,80 +121,24 @@
                     <option>Cancelada</option>
                 </select>
             </div>
-        
-            <!-- CPF --
-            <div class="col-md-4">
-                <label for="inputCPFClient" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="inputCPFClient" spellcheck="false" maxlength="15" disabled>
-            </div>            
-            -->
-            <!-- Motocicleta -->
-            <div class="col-md-8">
-                <label class="form-label" for="inputComputer">Motocicleta</label>
-                <input type="text" class="form-control" id="inputComputer" maxlength="30" required>
-            </div>
-
-            <!-- Descrição do Serviço -->
-            <div class="col-md-12">
-                <label for="serviceDescription" class="form-label">Descrição do Serviço</label>
-                <textarea class="form-control" id="serviceDescription" rows="3" maxlength="200" required></textarea>
-            </div>
-
-            <!-- Materiais utilizados -->
-            <div class="col-md-12">
-                <label for="inputPecasClient" class="form-label">Materiais utilizados</label>
-                <input type="text" class="form-control" id="inputPecasClient" spellcheck="false" required maxlength="60">
-               </div>
-
-               <!-- Data de conclusão -->
-            <div class="col-md-3">
-                <label for="inputconclusãoClient" class="form-label">Data de conclusão</label>
-                <input type="text" class="form-control" id="inputconclusãoClient" spellcheck="false" required maxlength="30">
-               </div>
-
-               <!-- Mecanico Responsavel -->
-            <div class="col-md-3">
-                <label for="inputOrcamentoClient" class="form-label">Profissional</label>
-                <input type="text" class="form-control" id="inputOrcamentoClient" spellcheck="false" required maxlength="30">
-               </div>
-
-                <!-- Forma de pagamento -->
-            <div class="col-md-3">
-                <label for="inputpagamentoClient" class="form-label">Forma de pagamento</label>
-                <select type="text" class="form-select" id="inputpagamentoClient" spellcheck="false" required maxlength="20">
-                    <option value=""></option>
-                    <option>Pix</option>
-                    <option>Cartão Débito</option>
-                    <option>Cartão Crédito</option>
-                    <option>Dinheiro</option>
-                    <option>Boleto</option>
-                </select>
-               </div>
-               
-               <!-- Valor do serviço -->
-            <div class="col-md-3">
-                <label class="form-label" for="inputTotal">Valor</label>
-                <input type="number" class="form-control" id="inputTotal" step="0.01" min="0">
-            </div>
-            
+                                    
             <!-- Linha -->
-            <!--<hr class="mt-4 border border-secondary border -1"> -->
-            <!-- <div class="mt-3"> </div> -->
-             
-            <div class="mt-5 d-flex justify-content-center gap-1">
-                <button type="submit" class="btn btn-success" id="btnCreate">Gerar OS</button>                
+            <hr class="row mt-4 aling-itens-end">
+
+            <div class="mt-2 justify-content-center gap-1 aling-itens-center">
+                <button type="submit" class="btn btn-success" id="btnCreate">Gerar OS</button>  
+                <button type="button" class="btn btn-primary" onclick="findOS()" >Buscar OS</button>              
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar OS</button>
-                <button type="button" class="btn btn-danger" id="btnDelete">Excluir OS</button>
-                <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
-                <button type="button" class="btn btn-primary" onclick="findOS()" id="btnBuscaOS">Buscar OS</button>
+                <button type="button" class="btn btn-danger" id="btnDelete">Excluir OS</button>  
                 <button type="button" class="btn btn-secondary">Imprimir OS</button>
+                <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
         </form>
     </div>
 
     <!-- Bootstrap -->
     <script src="../public/js/bootstrap.min.js"></script>
     <!-- renderizador -->
-    <script src="rendererOs.js"></script>
+    <script src="../views/rendererOs.js"></script>
 </body>
 
 </html>

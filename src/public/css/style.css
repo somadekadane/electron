@@ -2,48 +2,12 @@
 
 /* Botões (tela principal) */
 .button img {
-    margin: 50px 15px 25px 15px;
+    margin: 50px 30px 25px 45px;
     padding: 5px;
     border: 1px solid #e8e8e8;
+    border-radius: 10%;
     cursor: pointer;
-}
-
-/* Botão reset 
-#btnReset {
-    width: 48px;
-    height: 48px;
-    background-image: url('../img/clear.png');
-    border: none;
-    cursor: pointer;
-   
-} */
-
-/* logo */
-#logo {
-    position: fixed;
-    bottom: 40px;
-    /* right: 5 px; */
-    border: none;
-    cursor: none;
-    margin-left: -100px;
-}
-
-/* ocultar o campomdo cliente */
-#idClient {
-    display: none;
-}
-
-/* rodapé */
-footer {
-    width: 100%;
-    height: 55px;
-    display: flex;
-    background-color: #323232;
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
+    background-color: rgb(255, 255, 255);
 }
 
 /* Botao reset */
@@ -55,11 +19,51 @@ footer {
     cursor: pointer; 
     margin-left: 10px;
 } 
- 
+
+/* logo */
+#logo {
+    position: fixed;
+    bottom: 36px;
+    right: 5 px;
+    border: none;
+    cursor: none;
+    margin-left: -300px;
+}
+
+/* rodapé */
+footer {
+    background-color: #0078d7;
+    color: white;    
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    font-size: 12pt;
+    display: flex;    
+    justify-content: space-between;    
+}
+
+/* Botao reset */
+#btnReset {
+    width: 48px;
+    height: 48px;
+    background-image: url('../img/clear.png');
+    border: none;
+    cursor: pointer;
+}
+
+/* ocultar o campomdo cliente */
+#idClient {
+    display: none;
+}
+
+/* rodapé */
 footer p {
     color: #ffffff;
-    padding-top: 7px;
-    font-size: 1.2em;
+    padding-top: 6px;
+    margin: 0;
+    font-size: 1.1em;
 }
 
 body {
@@ -72,9 +76,9 @@ body {
     max-width: 301px;
 }
 
-#viewListSuggestion li {
+/*#viewListSuggestion li {
     background-color: #E0F0FF;
-}
+} */
 
 /* Dados do cliente - OS */
 #inputSearchClient, #viewListSuggestion, #inputIdClient, #inputNameClient, #inputPhoneClient {

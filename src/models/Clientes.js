@@ -1,6 +1,5 @@
 /**
- * Modelo de dados para construção das coleções("tabelas")
- * Clientes
+ * Modelo de dados para construção das coleções
  */
 
 // importação dos recursos do framework mongoose
