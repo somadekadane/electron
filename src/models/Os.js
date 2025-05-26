@@ -26,7 +26,7 @@ const osSchema = new Schema ({
     data: {
         type: String
     },
-    orcamento: {
+    valor: {
         type: String
     },
     pagamento: {

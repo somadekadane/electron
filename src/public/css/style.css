@@ -5,7 +5,7 @@
     margin: 50px 30px 25px 45px;
     padding: 5px;
     border: 1px solid #e8e8e8;
-    border-radius: 10%;
+    border-radius: 7%;
     cursor: pointer;
     background-color: rgb(255, 255, 255);
 }
@@ -24,15 +24,20 @@
 #logo {
     position: fixed;
     bottom: 36px;
-    right: 5 px;
+    right: 5px;
     border: none;
     cursor: none;
     margin-left: -300px;
 }
 
+/* ocultar o campomdo cliente */
+#idClient {
+    display: none;
+}
+
 /* rodapé */
 footer {
-    background-color: #0078d7;
+    background-color: #2a2a2a;
     color: white;    
     padding: 5px;
     position: fixed;
@@ -44,6 +49,14 @@ footer {
     justify-content: space-between;    
 }
 
+/* rodapé */
+footer p {
+    color: #ffffff;
+    padding-top: 6px;
+    margin: 0;
+    font-size: 1.1em;
+}
+
 /* Botao reset */
 #btnReset {
     width: 48px;
@@ -53,27 +66,14 @@ footer {
     cursor: pointer;
 }
 
-/* ocultar o campomdo cliente */
-#idClient {
-    display: none;
-}
-
-/* rodapé */
-footer p {
-    color: #ffffff;
-    padding-top: 6px;
-    margin: 0;
-    font-size: 1.1em;
-}
-
-body {
-    background-color: #d3d3d3;
-}
-
 /* lista de clientes vinculados a OS */
 #viewListSuggestion {
     z-index: 2;
     max-width: 301px;
+}
+
+body {
+    background-color: #d3d3d3;
 }
 
 /*#viewListSuggestion li {
@@ -81,6 +81,30 @@ body {
 } */
 
 /* Dados do cliente - OS */
-#inputSearchClient, #viewListSuggestion, #inputIdClient, #inputNameClient, #inputPhoneClient {
+#inputSearchClient, 
+#viewListSuggestion, 
+#inputIdClient, 
+#inputNameClient, 
+#inputPhoneClient {
     font-size: 0.9em;
+}
+/* ADICONADO POR ULTIMO*/
+/* Botão Buscar OS */
+#btnBuscaOS {
+    margin-left: 370px;
+}
+
+/* Remove as setas em todos os navegadores */
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    /* Firefox */
+    -webkit-appearance: none;
+    /* Safari e Chrome */
+}
+
+/* Remove as setas do Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    display: none;
 }
