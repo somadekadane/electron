@@ -790,12 +790,13 @@ ipcMain.on("new-os", async (event, os) => {
     // criar uma nova de estrutura de dados usando a classe modelo. Atenção! Os atributos precisam ser idênticos ao modelo de dados OS.js e os valores são definidos pelo conteúdo do objeto os
     const newOS = new osModel({
       idCliente: os.idClient_OS,
-      descricao: os.desOS,
+      problema: os.problem_OS,
       material: os.matOS,
       data: os.datOS,
       orcamento: os.orcOS,
+      valor: os.total_OS,
       pagamento: os.pagOS,
-      status: os.staOS,
+      statusOS: os.stat_OS,
     });
     // salvar os dados da OS no banco de dados
     await newOS.save();

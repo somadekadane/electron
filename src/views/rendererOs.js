@@ -95,7 +95,7 @@ let materialOS = document.getElementById("inputPecasClient");
 let dataOS = document.getElementById("inputconclusãoClient");
 let orcamentoOS = document.getElementById("inputOrcamentoClient");
 let pagamentoOS = document.getElementById("inputpagamentoClient");
-let statusOS = document.getElementById("osStatus");
+let statusOS = document.getElementById('inputStatus')
 let IdC = document.getElementById("inputIdClient");
 // captura da OS (CRUD Delete e Update)
 let idos = document.getElementById("inputOS");
@@ -128,12 +128,13 @@ if (idos.value === "") {
   const OS = {
   _id: idos.value,
     idClient_OS: idClient.value,
-    desOS: descricaoOS.value,
+    problem_OS: problem.value,
     matOS: materialOS.value,
     datOS: dataOS.value,
     orcOS: orcamentoOS.value,
+    total_OS: total.value,
     pagOS: pagamentoOS.value,
-    staOS: statusOS.value,
+    stat_OS: statusOS.value,
   };
   // Enviar ao main o objeto client - (Passo 2: fluxo)
   // uso do preload.js
@@ -172,10 +173,10 @@ api.renderOS((event, dataOS) => {
   IdC.value = os.idCliente;
   descricaoOS.value = os.descricao;
   materialOS.value = os.material;
-  dataOS.value = os.data;
-  orcamentoOS.value = os.orcamento;
+  dataOS.value = os.data;  
+  problem.value = os.problema;
   pagamentoOS.value = os.pagamento;
-  statusOS.value = os.status;
+  statusOS.value = os.statusOS
 });
 // == Fim - Buscar OS - CRUD Read ==========================
 
