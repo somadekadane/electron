@@ -31,6 +31,4 @@ const motoSchema = new Schema ({
 }, {versionKey: false})
 
 // exportar para o main o modulo de dados
-//OBS: Clientes será o nome da coleção Tabelas
-
 module.exports = model('Veículos', motoSchema)

@@ -2,7 +2,7 @@
 
 /* Botões (tela principal) */
 .button img {
-    margin: 50px 30px 25px 45px;
+    margin: 50px 15px 25px 15px;
     padding: 5px;
     border: 1px solid #e8e8e8;
     border-radius: 7%;
@@ -26,7 +26,7 @@
     bottom: 36px;
     right: 5px;
     border: none;
-    cursor: none;
+    cursor: pointer;
     margin-left: -300px;
 }
 
@@ -48,7 +48,6 @@ footer {
     display: flex;    
     justify-content: space-between;    
 }
-
 /* rodapé */
 footer p {
     color: #ffffff;
@@ -57,14 +56,14 @@ footer p {
     font-size: 1.1em;
 }
 
-/* Botao reset */
+/* Botao reset 
 #btnReset {
     width: 48px;
     height: 48px;
     background-image: url('../img/clear.png');
     border: none;
     cursor: pointer;
-}
+} */
 
 /* lista de clientes vinculados a OS */
 #viewListSuggestion {
@@ -76,9 +75,9 @@ body {
     background-color: #d3d3d3;
 }
 
-/*#viewListSuggestion li {
+#viewListSuggestion li {
     background-color: #E0F0FF;
-} */
+} 
 
 /* Dados do cliente - OS */
 #inputSearchClient, 

@@ -2,31 +2,21 @@
  * Processo de renderização
  * Tela principal
  */
-
 console.log("Processo de renderização")
 
-// Envio de uma mensagem para o main abrir a janela clinte
-function client() {
-    //console.log("teste do botão cliente")
-    //uso da api(autorizada no preload.js)
+function client() {    
     api.clientWindow()
 }
-
 // Envio de uma mensagem para o main abrir a janela os
-function os() {
-    //console.log("teste do botão os")
-    //uso da api(autorizada no preload.js)
+function os() {    
     api.osWindow()
 }
 // EDER envio de uma mensagem para o main abrir a janela moto
-function moto() {
-    // EDER uso do api(autorizada no preload.js)
+function moto() {    
     api.motoWindow()
 }
-
 // troca do icone do banco de dados
-api.dbStatus((event, message) => {
-    // teste de recebimento da msg do main
+api.dbStatus((event, message) => {  
     console.log(message)
     if (message === "conectado") {
         document.getElementById('statusdb').src = "../public/img/dbon.png"

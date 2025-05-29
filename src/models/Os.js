@@ -14,30 +14,32 @@ const osSchema = new Schema ({
     idCliente: {
         type: String,        
     },
-    /**nome: {
-        type: String,        
-    },*/
-    problema: {
-        type: String //descricao "Observações / Ocorrências"
-    },
-    servico: {
-        type: String //material
-    },
-    dataSaida: {
-        type: String //saida
-    },
-    valor: {
-        type: String
-    },
-    pagamento: {
-        type: String
-    },
     statusOS: {
         type: String
-    }, 
+    },
+    veiculo: {
+        type: String,        
+    }, //computador
+    placa: {
+        type: String        
+    }, //serie
+    problema: {
+        type: String //descricao "Observações / Ocorrências"
+    },    
+    observacao: {
+        type: String
+    },
+    tecnico: {
+        type: String  
+    },
+    diagnostico: {
+        type: String  
+    },
+    valor: {
+        type: String 
+    },
 }, {versionKey: false}) // não versionar os dados armazenados 
 
 // exportar para o main o moulo de dados
-//OBS: Clientes será o nome da coleção "tabelas"
 
 module.exports = model('OS', osSchema)
