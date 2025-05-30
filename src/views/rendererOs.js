@@ -1,10 +1,17 @@
-// ================================================
-// == Busca avançada - estilo Google ==============
+// ============================================================================
+// == Busca avançada - estilo Google ==========================================
 const input = document.getElementById("inputSearchClient");
 // capturar os ids nome do cliente
 const suggestionList = document.getElementById("viewListSuggestion");
 //capturar os campos preenchida
 let idClient = document.getElementById("inputIdClient");
+// Disparar ação de busca do nome e telefone do cliente quando o inputIdClient for preenchido (change - usado quando o campo input é desativado)
+idClient.addEventListener('change', () => {
+    if (idClient.value !== "") {
+        console.log(idClient.value)
+        api.searchIdClient(idClient.value)
+    }
+})
 let nameClient = document.getElementById("inputNameClient");
 let phoneClient = document.getElementById("inputPhoneClient");
 let cpfClient = document.getElementById("inputCPFClient");
@@ -28,11 +35,9 @@ input.addEventListener("input", () => {
     arrayClients = listaClients;
     //Passo 4: filtrar os dados dos clientes extraindo nomes
     // que tenham relação com os caracteres digitando busca tempo real
-    const results = arrayClients
-      .filter(
-        (c) => c.nomeCliente && c.nomeCliente.toLowerCase().includes(search)
-      )
-      .slice(0, 8); // máximo 10 resultados
+    const results = arrayClients.filter((c) => 
+      c.nomeCliente && c.nomeCliente.toLowerCase().includes(search)
+      ).slice(0, 8); // máximo 10 resultados
     //console.log(results) // Importante pra o entendimento
     //limpar a lista a cada caracteres
     suggestionList.innerHTML = "";
@@ -72,18 +77,18 @@ document.addEventListener('click', (e) => {
     suggestionList.innerHTML = "";
   }
 });
-// == fim busca avançada ==============================
-//=====================================================
+// == fim busca avançada ======================================================
+//=============================================================================
 
 const foco = document.getElementById('searchClient')
 
 //Iniciar a janela de clientes alterando as propriedades de alguns elementos
-/*document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     btnUpdate.disabled = true
     btnDelete.disabled = true
     // Foco na busca do cliente
-    foco.focus()
-}) */
+    //foco.focus()
+})
 
 // criar um vetor para manipulação dos dados da OS
 let arrayOS = [];
@@ -102,8 +107,8 @@ let idos = document.getElementById("inputOS");
 // captura do id do campo data
 let dateOS = document.getElementById("inputData");
 
-// =======================================================
-// == CRUD Creat/Update ==================================
+// ============================================================================
+// == CRUD Creat/Update =======================================================
 
 // Evento associado ao botão submit (uso das validações do html)
 frmOS.addEventListener('submit', async (event) => {
@@ -113,42 +118,53 @@ frmOS.addEventListener('submit', async (event) => {
   if (idClient.value === "") {
     api.validateClient();
   } else {
-    //Teste importante ( recebimento dos dados do formulario - passo 1 do fluxo)
-    //console.log(
-     // _idClient_OS: idClient.value,
-      //desOS: descricaoOS.value,
-     // matOS: materialOS.value,
-     // datOS: dataOS.value,
-     //orcOS: orcamentoOS.value,
-     // pagOS: pagamentoOS.value,
-//staOS: statusOS.value,
+        // Teste importante (recebimento dos dados do formuláro - passo 1 do fluxo)
+        console.log(idOS.value, idClient.value, statusOS.value, computer.value, serial.value, problem.value, obs.value, specialist.value, diagnosis.value, parts.value, total.value)
+        if (idOS.value === "") {
+            //Gerar OS
+            //Criar um objeto para armazenar os dados da OS antes de enviar ao main
+            const os = {
+                idClient_OS: idClient.value,
+                stat_OS: statusOS.value,
+                computer_OS: computer.value,
+                serial_OS: serial.value,
+                problem_OS: problem.value,
+                obs_OS: obs.value,
+                specialist_OS: specialist.value,
+                diagnosis_OS: diagnosis.value,
+                parts_OS: parts.value,
+                total_OS: total.value
+            }
+            // Enviar ao main o objeto os - (Passo 2: fluxo)
+            // uso do preload.js
+            api.newOS(os)
+        } else {
+            //Editar OS
+            //Gerar OS
+            //Criar um objeto para armazenar os dados da OS antes de enviar ao main
+            const os = {
+                id_OS: idOS.value,
+                idClient_OS: idClient.value,
+                stat_OS: statusOS.value,
+                computer_OS: computer.value,
+                serial_OS: serial.value,
+                problem_OS: problem.value,
+                obs_OS: obs.value,
+                specialist_OS: specialist.value,
+                diagnosis_OS: diagnosis.value,
+                parts_OS: parts.value,
+                total_OS: total.value
+            }
+            // Enviar ao main o objeto os - (Passo 2: fluxo)
+            // uso do preload.js
+            api.updateOS(os)
+        }
+    }
+})      
+// == fim CRUD Creat/Update ===================================================
 
-if (idos.value === "") {
-  // Criar um objeto para armazenar os dados do cliente amtes de enviar ao main
-  const OS = {
-  _id: idos.value,
-    idClient_OS: idClient.value,
-    problem_OS: problem.value,
-    matOS: materialOS.value,
-    datOS: dataOS.value,
-    orcOS: orcamentoOS.value,
-    total_OS: total.value,
-    pagOS: pagamentoOS.value,
-    stat_OS: statusOS.value,
-  };
-  // Enviar ao main o objeto client - (Passo 2: fluxo)
-  // uso do preload.js
-  api.newOS(OS);
-} else {
-  //Editar OS
-}
-}
-});
-      
-// == fim CRUD Creat/Update ===================================
-
-// =============================================================
-// == Busca OS - CRUD Raad =====================================
+// ============================================================================
+// == Busca OS - CRUD Raad ====================================================
 
 function findOS() {
   api.searchOS();
@@ -169,19 +185,52 @@ api.renderOS((event, dataOS) => {
     minute: "2-digit",
     second: "2-digit",
   });
-  dateOS.value = formatada;
-  IdC.value = os.idCliente;
-  descricaoOS.value = os.descricao;
-  materialOS.value = os.material;
-  dataOS.value = os.data;  
-  problem.value = os.problema;
-  pagamentoOS.value = os.pagamento;
-  statusOS.value = os.statusOS
-});
-// == Fim - Buscar OS - CRUD Read ==========================
+  dateOS.value = formatada
+    idClient.value = os.idCliente
+    // disparar ação de busca do cliente pelo id
+    idClient.dispatchEvent(new Event('change'))    
+    statusOS.value = os.statusOS
+    computer.value = os.computador
+    serial.value = os.serie
+    problem.value = os.problema
+    obs.value = os.observacao
+    specialist.value = os.tecnico
+    diagnosis.value = os.diagnostico
+    parts.value = os.pecas
+    total.value = os.valor
+    // desativar o botão adicionar
+    btnCreate.disabled = true
+    // ativar os botões editar e excluir
+    btnUpdate.disabled = false
+    btnDelete.disabled = false
+})
 
-// =========================================================
-// == Reset form ===========================================
+// receber dados do cliente para preenchimento da OS
+api.renderIdClient((event, dataClient) => {
+    console.log(dataClient)
+  
+}) 
+// == Fim - Buscar OS - CRUD Read =============================================
+
+// ============================================================================
+// == CRUD Delete =============================================================
+
+function removeOS() {
+    console.log(idOS.value) // Passo 1 (receber do form o id da OS)
+    api.deleteOS(idOS.value) // Passo 2 (enviar o id da OS ao main)
+}
+
+// == Fim - CRUD Delete =======================================================
+
+// ============================================================================
+// == Imprimir OS =============================================================
+function generateOS() {
+api.printOS();
+}
+// == Fim - Imprimir OS =======================================================
+
+// ============================================================================
+//== Reset form ===============================================================
 function resetForm() {
   //Limpar os campos e resetar o formulario com as configurações pré definidas
   location.reload();
@@ -191,13 +240,4 @@ function resetForm() {
 api.resetForm((args) => {
   resetForm();
 });
-// == Fim - Reset form ===================================
-// =======================================================
-
-// =======================================================
-// == Imprimir OS ========================================
-function generateOS() {
-api.printOS();
-}
-// == Fim - Imprimir OS ==================================
-// =======================================================
+// == Fim - Reset form ========================================================
