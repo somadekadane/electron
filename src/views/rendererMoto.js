@@ -1,12 +1,8 @@
-// Iniciar a janela de clientes alterando as propriedades de alguns elementos
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdate.disabled = true
     btnDelete.disabled = true
-    // Foco na busca do cliente
     foco.focus()
 })
-
-//captura dos dados dos inputs do formulario
 let frmMoto = document.getElementById('frmMoto')
 let proprietarioMoto = document.getElementById('inputProprietarioClient')
 let marcaMoto = document.getElementById('inputMarcaClient')
@@ -16,17 +12,11 @@ let placaMoto = document.getElementById('inputPlacaClient')
 let corMoto = document.getElementById('inputCorClient')
 let chassiMoto = document.getElementById('inputChassiClient')
 
-// =======================================================
-// == CRUD Creat/Update ==================================
+frmMoto.addEventListener('submit', async (event) => {
 
-// Evento associado ao botão submit 
-frmMoto.addEventListener('submit', async (event) =>{
-    //evitar o comportamento padrao do submit
     event.preventDefault()
-    //Teste importante ( recebimento dos dados do formulario 
-    console.log(proprietarioMoto.value, marcaMoto.value, modeloMoto.value, anoMoto.value, placaMoto.value, corMoto.value, chassiMoto.value) 
+    console.log(proprietarioMoto.value, marcaMoto.value, modeloMoto.value, anoMoto.value, placaMoto.value, corMoto.value, chassiMoto.value)
 
-    // Criar um objeto para armazenar os dados do cliente amtes de enviar ao main
     const mot = {
         proMot: proprietarioMoto.value,
         marMot: marcaMoto.value,
@@ -34,23 +24,15 @@ frmMoto.addEventListener('submit', async (event) =>{
         anoMot: anoMoto.value,
         plaMot: placaMoto.value,
         corMot: corMoto.value,
-        chasMot: chassiMoto.value 
+        chasMot: chassiMoto.value
     }
-    // Enviar ao main o objeto client - (Passo 2 fluxo)
-    // uso do preload.js
-    api.newMoto(mot) 
-}) 
-// == fim CRUD Creat/Update ==============================
+    api.newMoto(mot)
+})
 
-//========================================================
-// == Reset form =========================================
-function resetForm(){
-    //Limpar os campos e resetar o formulario com as configurações pré definidas
+function resetForm() {
     location.reload()
 }
 
-// Recebimento do pedido do main para resetar o formulario
-api.resetForm((args)=>{
+api.resetForm((args) => {
     resetForm()
 })
-// == Fim - Reset form ===================================
