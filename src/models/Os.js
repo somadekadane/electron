@@ -17,7 +17,7 @@ const osSchema = new Schema ({
     statusOS: {
         type: String
     },
-    veiculo: {
+    motocicleta: {
         type: String,        
     }, //computador
     placa: {

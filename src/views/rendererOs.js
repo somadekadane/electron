@@ -95,13 +95,17 @@ let arrayOS = [];
 
 //captura dos dados dos inputs do formulario (passo 1 fluxo)
 let frmOS = document.getElementById("frmOS");
-let descricaoOS = document.getElementById("serviceDescription");
-let materialOS = document.getElementById("inputPecasClient");
-let dataOS = document.getElementById("inputconclusãoClient");
-let orcamentoOS = document.getElementById("inputOrcamentoClient");
-let pagamentoOS = document.getElementById("inputpagamentoClient");
+let nameOS = document.getElementById('inputNameOS')
+let IdC = document.getElementById('inputIdClient')
 let statusOS = document.getElementById('inputStatus')
-let IdC = document.getElementById("inputIdClient");
+let motorcycleOS = document.getElementById('inputMotorcycle') // motocicleta
+let serial = document.getElementById('inputSerial')     // placa
+let problem = document.getElementById('inputProblem')   // prolema informado
+let obs = document.getElementById('inputObs')           // observacao
+let specialist = document.getElementById('inputSpecialist') // mecanico
+let diagnosis = document.getElementById('inputDiagnosis') // laudo tecnico
+let parts = document.getElementById('inputParts') // troca de pecas
+let total = document.getElementById('inputTotal') // valor
 // captura da OS (CRUD Delete e Update)
 let idos = document.getElementById("inputOS");
 // captura do id do campo data
@@ -119,14 +123,15 @@ frmOS.addEventListener('submit', async (event) => {
     api.validateClient();
   } else {
         // Teste importante (recebimento dos dados do formuláro - passo 1 do fluxo)
-        console.log(idOS.value, idClient.value, statusOS.value, computer.value, serial.value, problem.value, obs.value, specialist.value, diagnosis.value, parts.value, total.value)
+        console.log(nameOS.value, idOS.value, idClient.value, statusOS.value, motorcycleOS.value, serial.value, problem.value, obs.value, specialist.value, diagnosis.value, parts.value, total.value)
         if (idOS.value === "") {
             //Gerar OS
             //Criar um objeto para armazenar os dados da OS antes de enviar ao main
             const os = {
                 idClient_OS: idClient.value,
+                nameOS: nameOS.value, //EDER
                 stat_OS: statusOS.value,
-                computer_OS: computer.value,
+                motocicleta: motorcycleOS.value, //EDER
                 serial_OS: serial.value,
                 problem_OS: problem.value,
                 obs_OS: obs.value,
@@ -146,7 +151,7 @@ frmOS.addEventListener('submit', async (event) => {
                 id_OS: idOS.value,
                 idClient_OS: idClient.value,
                 stat_OS: statusOS.value,
-                computer_OS: computer.value,
+                motocicleta: motorcycleOS.value, //EDER
                 serial_OS: serial.value,
                 problem_OS: problem.value,
                 obs_OS: obs.value,
@@ -185,12 +190,14 @@ api.renderOS((event, dataOS) => {
     minute: "2-digit",
     second: "2-digit",
   });
-  dateOS.value = formatada
+
+    dateOS.value = formatada
+    nameClient.value = os.NomeOS //EDER
     idClient.value = os.idCliente
     // disparar ação de busca do cliente pelo id
     idClient.dispatchEvent(new Event('change'))    
     statusOS.value = os.statusOS
-    computer.value = os.computador
+    motorcycleOS.value = os.motocicleta // vem de onde EDER**********
     serial.value = os.serie
     problem.value = os.problema
     obs.value = os.observacao

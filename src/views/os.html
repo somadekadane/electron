@@ -16,7 +16,6 @@
 <body>
     <div class="container">
         <form class="mt-1 row g-3" id="frmOS">
-
             <!-- OS -->
             <div class="col-md-4">
                 <label class="form-label">Nº da Ordem</label>
@@ -36,15 +35,15 @@
             </div> 
 
             <!-- Buscar cliente -->
-            <div class="col-md-5">
+            <div class="col-md-10">
 
             </div>
 
             <!-- Buscar cliente -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="inputSearchClient" class="form-label">Buscar Cliente</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="inputSearchClient" spellcheck="false" maxlength="30">
+                    <input type="text" class="form-control" id="inputSearchClient" spellcheck="false" maxlength="20">
                     <span class="input-group-text">
                         <img src="../public/img/search.png" alt="lupa" width="20">
                     </span>                    
@@ -66,7 +65,7 @@
             </div>
 
             <!-- Telefone -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="inputPhoneClient" class="form-label">Telefone</label>
                 <input type="text" class="form-control" id="inputPhoneClient" spellcheck="false" maxlength="15"
                     disabled>
@@ -92,7 +91,7 @@
 
             <!-- Motocicleta -->
             <div class="col-md-6">
-                <label class="form-label" for="inputMotorcycle">Veículo</label>
+                <label class="form-label" for="inputMotorcycle">Motocicleta</label>
                 <input type="text" class="form-control" id="inputMotorcycle" maxlength="44" required>
             </div>
 
@@ -137,9 +136,8 @@
                 <label class="form-label" for="inputTotal">Valor</label>
                 <input type="number" class="form-control" id="inputTotal" step="0.01" min="0">
             </div>
-                                                 
-            <!-- Linha <hr class="row mt-4 aling-itens-end">-->            
 
+            <!-- Linha <hr class="row mt-4 aling-itens-end">--> 
             <div class="mt-5 d-flex justify-content-center gap-1">
                 <button type="submit" class="btn btn-success" id="btnCreate">Gerar OS</button>                             
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar OS</button>

@@ -27,6 +27,7 @@ const fs = require("fs");
 
 // Importação do recurso 'electron-prompt' (dialog de imput)
 const prompt = require("electron-prompt");
+const Os = require("./src/models/Os.js");
 
 // Janela principal
 let win;
@@ -82,9 +83,9 @@ function clientWindow() {
   if (main) {
     client = new BrowserWindow({
       width: 1010,
-      height: 680,
-      autoHideMenuBar: true,
-      resizable: false,
+      height: 720,
+     // autoHideMenuBar: true,
+     // resizable: false,
       parent: main,
       modal: true,
       //ativação do preload.js
@@ -105,8 +106,8 @@ function osWindow() {
   if (main) {
     osScreen = new BrowserWindow({
       width: 1010,
-      height: 800,
-      autoHideMenuBar: true,
+      height: 820,
+      //autoHideMenuBar: true,
       resizable: false,
       parent: main,
       modal: true,
@@ -191,7 +192,7 @@ const template = [
       },
       {
         label: "Veículo",
-        click: () => osWindow(),
+        click: () => motoWindow(),
       },
       {
         label: "OS",
@@ -383,6 +384,7 @@ ipcMain.on("new-moto", async (event, mot) => {
   }
 });
 //===== Fim - Veiculo - CRUD Create ===========================================
+
 
 //=============================================================================
 //===== Relatório de clientes =================================================
@@ -796,8 +798,9 @@ ipcMain.on("new-os", async (event, os) => {
     // criar uma nova de estrutura de dados usando a classe modelo. Atenção! Os atributos precisam ser idênticos ao modelo de dados OS.js e os valores são definidos pelo conteúdo do objeto os
     const newOS = new osModel({
       idCliente: os.idClient_OS,
+      NomeOS: os.NameN,  //EDER
       statusOS: os.stat_OS,
-      motocicleta: os.motors_OS,
+      motocicleta: os.motor_OS, //EDER
       serie: os.serial_OS,
       problema: os.problem_OS,
       observacao: os.obs_OS,
@@ -932,7 +935,7 @@ ipcMain.on('update-os', async (event, os) => {
             {
                 idCliente: os.idClient_OS,
                 statusOS: os.stat_OS,
-                motocicleta: os.motors_OS,
+                motocicleta: os.motor_OS,  //EDER
                 serie: os.serial_OS,
                 problema: os.problem_OS,
                 observacao: os.obs_OS,
@@ -1000,7 +1003,7 @@ ipcMain.on('print-os', async (event) => {
 
                       // formatação do documento pdf
                       const doc = new jsPDF('p', 'mm', 'a4')
-                      const imagePath = path.join(__dirname, 'src', 'public', 'img', 'logo.png')
+                      const imagePath = path.join(__dirname, 'src', 'public', 'img', 'logo4.png')
                       const imageBase64 = fs.readFileSync(imagePath, { encoding: 'base64' })
                       doc.addImage(imageBase64, 'PNG', 5, 8)
                       doc.setFontSize(18)
@@ -1069,7 +1072,7 @@ async function printOS(osId) {
 
         // formatação do documento pdf
         const doc = new jsPDF('p', 'mm', 'a4')
-        const imagePath = path.join(__dirname, 'src', 'public', 'img', 'logo.png')
+        const imagePath = path.join(__dirname, 'src', 'public', 'img', 'logo4.png')
         const imageBase64 = fs.readFileSync(imagePath, { encoding: 'base64' })
         doc.addImage(imageBase64, 'PNG', 5, 8)
         doc.setFontSize(18)
