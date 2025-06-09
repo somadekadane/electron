@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
 </head>
-
 <body>
     <div class="container">
         <form class="mt-1 row g-3" id="frmOS">
@@ -27,7 +25,6 @@
             </div>
             <div class="col-md-10">
             </div>
-
             <div class="col-md-3">
                 <label for="inputSearchClient" class="form-label">Buscar Cliente</label>
                 <div class="input-group">
@@ -38,7 +35,6 @@
                 </div>
                 <ul id="viewListSuggestion" class="list-group position-absolute w-100"></ul>
             </div>
-
             <div class="col-md-3">
                 <label for="inputIdClient" class="form-label">ID do Cliente</label>
                 <input type="text" class="form-control" id="inputIdClient" spellcheck="false" maxlength="15" disabled>
@@ -54,7 +50,6 @@
             </div>
             <input type="text" id="idClient">
             <hr class="mt-4 border border-secondary border -1">
-
             <div class="col-md-3">
                 <label class="form-label">Status da OS</label>
                 <select class="form-select" id="inputStatus" required>
@@ -66,42 +61,34 @@
                     <option>Cancelada</option>
                 </select>
             </div>
-
             <div class="col-md-6">
                 <label class="form-label" for="inputMotorcycle">Motocicleta</label>
                 <input type="text" class="form-control" id="inputMotorcycle" maxlength="44" required>
             </div>
-
             <div class="col-md-3">
                 <label class="form-label" for="inputSerial">Placa</label>
                 <input type="text" class="form-control" id="inputSerial" maxlength="20">
             </div>
-
             <div class="col-md-7">
                 <label class="form-label" for="inputProblem">Problema Informado</label>
                 <input type="text" class="form-control" id="inputProblem" maxlength="54" required>
             </div>
-
             <div class="col-md-5">
                 <label class="form-label" for="inputObs">Observações</label>
                 <input type="text" class="form-control" id="inputObs" maxlength="35">
             </div>
-
             <div class="col-md-3">
                 <label class="form-label" for="inputSpecialist">Mecânico de Motocicletas</label>
                 <input type="text" class="form-control" id="inputSpecialist" maxlength="20">
             </div>
-
             <div class="col-md-9">
                 <label class="form-label" for="inputDiagnosis">Laudo Técnico / Serviço Executado</label>
                 <input type="text" class="form-control" id="inputDiagnosis" maxlength="60">
             </div>
-
             <div class="col-md-9">
                 <label class="form-label" for="inputParts">Troca de Peças</label>
                 <input type="text" class="form-control" id="inputParts" maxlength="60">
             </div>
-
             <div class="col-md-3">
                 <label class="form-label" for="inputTotal">Valor</label>
                 <input type="number" class="form-control" id="inputTotal" step="0.01" min="0">
@@ -118,5 +105,4 @@
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="../views/rendererOs.js"></script>
 </body>
-
 </html>

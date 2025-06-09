@@ -32,5 +32,4 @@ const osSchema = new Schema ({
         type: String 
     },
 }, {versionKey: false}) 
-
 module.exports = model('OS', osSchema)

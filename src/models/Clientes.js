@@ -1,5 +1,4 @@
 const { model, Schema } = require('mongoose')
-
 const clienteSchema = new Schema({
     nomeCliente: {
         type: String
@@ -36,7 +35,5 @@ const clienteSchema = new Schema({
     ufCliente: {
         type: String
     },
-
 }, { versionKey: false })
-
 module.exports = model('Clientes', clienteSchema)

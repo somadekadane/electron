@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 .button img {
     margin: 50px 15px 25px 15px;
     padding: 5px;
@@ -8,7 +7,6 @@
     cursor: pointer;
     background-color: rgb(255, 255, 255);
 }
-
 #btnReset {
     width: 48px;
     height: 48px;
@@ -17,7 +15,6 @@
     cursor: pointer;
     margin-left: 10px;
 }
-
 #logo {
     position: fixed;
     bottom: 36px;
@@ -26,11 +23,9 @@
     cursor: pointer;
     margin-left: -300px;
 }
-
 #idClient {
     display: none;
 }
-
 footer {
     background-color: #0078d7;
     color: white;
@@ -43,27 +38,25 @@ footer {
     display: flex;
     justify-content: space-between;
 }
-
 footer p {
     color: #ffffff;
     padding-top: 6px;
     margin: 0;
     font-size: 1.1em;
 }
-
+#searchClient::placeholder {
+    color: #cccccc; 
+}
 #viewListSuggestion {
     z-index: 2;
     max-width: 301px;
 }
-
 body {
     background-color: #d3d3d3;
 }
-
 #viewListSuggestion li {
     background-color: #E0F0FF;
 }
-
 #inputSearchClient,
 #viewListSuggestion,
 #inputIdClient,
@@ -71,17 +64,14 @@ body {
 #inputPhoneClient {
     font-size: 0.9em;
 }
-
 #btnBuscaOS {
     margin-left: 370px;
 }
-
 input[type=number] {
     appearance: textfield;
     -moz-appearance: textfield;
     -webkit-appearance: none;
 }
-
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     display: none;

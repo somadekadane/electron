@@ -1,5 +1,4 @@
 const { model, Schema } = require('mongoose')
-
 const motoSchema = new Schema ({
     proprietarioMoto: {
         type: String
@@ -23,5 +22,4 @@ const motoSchema = new Schema ({
         type: String
     }
 }, {versionKey: false})
-
 module.exports = model('Veículos', motoSchema)
